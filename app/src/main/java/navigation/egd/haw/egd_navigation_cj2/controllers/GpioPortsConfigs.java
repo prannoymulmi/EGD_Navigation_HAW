@@ -7,7 +7,7 @@ import java.io.IOException;
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.IGpioPortsConfigs;
 import navigation.egd.haw.egd_navigation_cj2.constants.RaspberyPiPortsConstants;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IGpioPortConfigCallbackListener;
-import navigation.egd.haw.egd_navigation_cj2.services.GPIOConfigServices.GpioPortConfigService;
+import navigation.egd.haw.egd_navigation_cj2.services.PortConfigServices.GPIOConfigServices.GpioPortConfigService;
 
 /**
  * @author Prannoy

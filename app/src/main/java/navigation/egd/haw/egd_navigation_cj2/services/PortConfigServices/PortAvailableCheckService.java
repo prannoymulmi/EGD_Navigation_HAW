@@ -1,4 +1,4 @@
-package navigation.egd.haw.egd_navigation_cj2.services;
+package navigation.egd.haw.egd_navigation_cj2.services.PortConfigServices;
 
 import com.google.android.things.pio.PeripheralManagerService;
 
