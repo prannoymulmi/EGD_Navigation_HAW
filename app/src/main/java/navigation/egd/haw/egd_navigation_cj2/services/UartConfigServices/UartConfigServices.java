@@ -7,7 +7,6 @@ import com.google.android.things.pio.UartDevice;
 import java.io.IOException;
 
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.IUartPortsConfigs;
-import navigation.egd.haw.egd_navigation_cj2.constants.RaspberyPiPortsConstants;
 import navigation.egd.haw.egd_navigation_cj2.services.PortAvailableCheckService;
 
 /**
@@ -20,23 +19,35 @@ import navigation.egd.haw.egd_navigation_cj2.services.PortAvailableCheckService;
 public class UartConfigServices extends PortAvailableCheckService implements IUartPortsConfigs{
 
     private UartDevice mDevice;
-    public UartConfigServices() {
+    private String uartPortName;
+    private int baudRate;
+    private int dataSize;
+    private int stopBits;
 
+    public UartConfigServices(String uartPortName, int baudRate, int dataSize, int stopBits) {
+        this.uartPortName = uartPortName;
+        this.baudRate= baudRate;
+        this.dataSize = dataSize;
+        this.stopBits = stopBits;
     }
 
     //Must be more generic
     @Override
     public void confiugureUartPorts() {
         try {
-            mDevice = service.openUartDevice(RaspberyPiPortsConstants.UART_PIN_8_TXD);
-            mDevice.setBaudrate(115200);
-            mDevice.setDataSize(8);
+            mDevice = service.openUartDevice(this.uartPortName);
+            mDevice.setBaudrate(this.baudRate);
+            mDevice.setDataSize(baudRate);
             mDevice.setParity(UartDevice.PARITY_NONE);
-            mDevice.setStopBits(1);
+            mDevice.setStopBits(this.stopBits);
         } catch (IOException e) {
             Log.w("TEST", "Unable to access UART device", e);
         }
     }
+
+    /**
+     * TODO: Reading and wrting methods missing
+     */
 
     @Override
     public void closeUartPorts() {
