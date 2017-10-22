@@ -12,5 +12,5 @@ import java.io.IOException;
  */
 
 public interface IGpioPortConfigCallbackListener {
-    public void portCallback(Gpio gpioPort) throws IOException;
+    void portCallback(Gpio gpioPort) throws IOException;
 }

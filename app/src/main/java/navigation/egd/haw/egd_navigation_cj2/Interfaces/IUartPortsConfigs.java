@@ -5,6 +5,6 @@ package navigation.egd.haw.egd_navigation_cj2.Interfaces;
  */
 
 public interface IUartPortsConfigs {
-    public void confiugureUartPorts();
-    public void closeUartPorts();
+    void confiugureUartPorts();
+    void closeUartPorts();
 }

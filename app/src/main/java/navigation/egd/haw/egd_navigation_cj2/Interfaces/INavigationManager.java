@@ -11,7 +11,7 @@ import navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices.Navig
  */
 
 public interface INavigationManager {
-     public DirectionAPIService getApiService();
-     public GPSService getGpsService();
-     public NavigationIOProcessService getNavigationIOProcessService() ;
+     DirectionAPIService getApiService();
+     GPSService getGpsService();
+     NavigationIOProcessService getNavigationIOProcessService() ;
 }

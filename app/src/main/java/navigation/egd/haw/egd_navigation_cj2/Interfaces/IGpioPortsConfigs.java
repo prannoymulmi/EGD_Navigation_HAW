@@ -7,6 +7,6 @@ package navigation.egd.haw.egd_navigation_cj2.Interfaces;
  */
 
 public interface IGpioPortsConfigs {
-    public void confiugureGpioPorts();
-    public void closeGpioPorts();
+    void confiugureGpioPorts();
+    void closeGpioPorts();
 }
