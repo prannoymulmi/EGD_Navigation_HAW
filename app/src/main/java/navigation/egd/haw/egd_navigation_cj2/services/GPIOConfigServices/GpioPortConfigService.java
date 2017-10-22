@@ -1,5 +1,6 @@
-package navigation.egd.haw.egd_navigation_cj2.services;
+package navigation.egd.haw.egd_navigation_cj2.services.GPIOConfigServices;
 
+import com.google.android.things.pio.Gpio;
 import com.google.android.things.pio.PeripheralManagerService;
 
 import navigation.egd.haw.egd_navigation_cj2.Exceptions.GpioPortDirectionException;
@@ -9,12 +10,14 @@ import navigation.egd.haw.egd_navigation_cj2.constants.RaspberyPiPortsConstants;
 /**
  * @author Prannoy
  * @Description This a class that configures a GPIO port (Output/Input)
+ * https://developer.android.com/things/sdk/pio/gpio.html
  * Created by prann on 10/20/2017.
  */
 
 public class GpioPortConfigService {
 
     private GPIOPortOutputConfigService gpioPortOutputConfigService;
+    private GPIOPortInputConfigService gpioPortInputConfigService;
     private boolean isGPIOOutput;
 
     public GpioPortConfigService() {
@@ -24,14 +27,19 @@ public class GpioPortConfigService {
     public GpioPortConfigService(String gpioPortName, int direction) {
         this.isGPIOOutput = direction == RaspberyPiPortsConstants.GPIO_DIRECTION_OUT_INITIALLY_HIGH || direction == RaspberyPiPortsConstants.GPIO_DIRECTION_OUT_INITIALLY_LOW;
         if(this.isGPIOOutput){
-            gpioPortOutputConfigService = new GPIOPortOutputConfigService(gpioPortName, direction);
+            this.gpioPortOutputConfigService = new GPIOPortOutputConfigService(gpioPortName, direction);
+        } else {
+            this.gpioPortInputConfigService = new GPIOPortInputConfigService(gpioPortName);
         }
     }
 
     public GpioPortConfigService(String gpioPortName, int direction, int edge) {
         this.isGPIOOutput = direction == RaspberyPiPortsConstants.GPIO_DIRECTION_OUT_INITIALLY_HIGH || direction == RaspberyPiPortsConstants.GPIO_DIRECTION_OUT_INITIALLY_LOW;
         if(this.isGPIOOutput){
-            gpioPortOutputConfigService = new GPIOPortOutputConfigService(gpioPortName, direction, edge);
+            this.gpioPortOutputConfigService = new GPIOPortOutputConfigService(gpioPortName, direction);
+        }
+        else {
+            this.gpioPortInputConfigService = new GPIOPortInputConfigService(gpioPortName);
         }
     }
 
@@ -41,6 +49,8 @@ public class GpioPortConfigService {
     public void ConfigurePort() {
         if(this.isGPIOOutput){
             gpioPortOutputConfigService.ConfigurePort();
+        } else {
+            gpioPortInputConfigService.ConfigurePort();
         }
 
     }
@@ -52,25 +62,36 @@ public class GpioPortConfigService {
     public void ResetPort() {
         if(this.isGPIOOutput){
             gpioPortOutputConfigService.ResetPort();
+        } else {
+            gpioPortInputConfigService.ResetPort();
         }
     }
 
 
     //----------------------- Getters and Setters ----------------
     public void setGpioPortConfigCallbackListener(IGpioPortConfigCallbackListener listner) throws GpioPortDirectionException {
-        if(gpioPortOutputConfigService !=null) {
+        if(gpioPortOutputConfigService != null) {
             gpioPortOutputConfigService.setGpioPortConfigCallbackListener(listner);
         }
         else {
-            throw new GpioPortDirectionException("The Direction of the GPIO is not in Output mode");
+            gpioPortInputConfigService.setGpioPortConfigCallbackListener(listner);
+        }
+    }
+
+    public Gpio getPort() {
+        if(this.isGPIOOutput){
+            return gpioPortOutputConfigService.getGpioPort();
+        } else {
+            return gpioPortInputConfigService.getGpioPort();
         }
     }
 
     public  PeripheralManagerService getService() {
         if(this.isGPIOOutput){
-            gpioPortOutputConfigService.getService();
+            return gpioPortOutputConfigService.getService();
+        } else {
+            return gpioPortInputConfigService.getService();
         }
-        return null;
     }
 }
 

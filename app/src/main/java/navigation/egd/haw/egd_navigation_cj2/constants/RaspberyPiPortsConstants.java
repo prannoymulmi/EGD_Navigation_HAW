@@ -3,8 +3,8 @@ package navigation.egd.haw.egd_navigation_cj2.constants;
 import com.google.android.things.pio.Gpio;
 
 /**
- * Contains the pins and config constanst which are required to setup a GPIO port in Rpi 3
  * @author Prannoy
+ * @Description Contains the pins and config constanst which are required to setup a GPIO port in Rpi 3
  * Created by prann on 10/20/2017.
  */
 
@@ -48,7 +48,9 @@ public class RaspberyPiPortsConstants {
     public static final int GPIO_EDGE_NONE = Gpio.EDGE_NONE;
 
     public static final int GPIO_DIRECTION_IN = Gpio.DIRECTION_IN;
-    public static final int GPIO_DIRECTION_OUT_INITIALLY_LOW= Gpio.DIRECTION_OUT_INITIALLY_LOW;
-    public static final int GPIO_DIRECTION_OUT_INITIALLY_HIGH= Gpio.DIRECTION_OUT_INITIALLY_HIGH;
+    public static final int GPIO_DIRECTION_OUT_INITIALLY_LOW = Gpio.DIRECTION_OUT_INITIALLY_LOW;
+    public static final int GPIO_DIRECTION_OUT_INITIALLY_HIGH = Gpio.DIRECTION_OUT_INITIALLY_HIGH;
+    public static final int GPIO_EDGE_ACTIVE_LOW = Gpio.ACTIVE_LOW;
+    public static final int GPIO_EDGE_ACTIVE_HIGH = Gpio.ACTIVE_HIGH;
 
 }

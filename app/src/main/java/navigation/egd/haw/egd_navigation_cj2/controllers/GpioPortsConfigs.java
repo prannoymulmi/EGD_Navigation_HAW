@@ -8,11 +8,11 @@ import navigation.egd.haw.egd_navigation_cj2.Exceptions.GpioPortDirectionExcepti
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.IGpioPortsConfigs;
 import navigation.egd.haw.egd_navigation_cj2.constants.RaspberyPiPortsConstants;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IGpioPortConfigCallbackListener;
-import navigation.egd.haw.egd_navigation_cj2.services.GpioPortConfigService;
+import navigation.egd.haw.egd_navigation_cj2.services.GPIOConfigServices.GpioPortConfigService;
 
 /**
  * @author Prannoy
- * This classis just a demo how to use the GPIOConfig Controller to use the GPIO Ports with
+ * @description This class is just a demo how to use the GPIOConfig Controller to use the GPIO Ports with
  * the use of listners which inject the callback function for the GPIO port
  * Created by prann on 10/20/2017.
  */
@@ -21,6 +21,7 @@ public class GpioPortsConfigs implements IGpioPortsConfigs {
     //Declaring the GpioConfigCongtoller classes
     private GpioPortConfigService gpioSimple;
     private GpioPortConfigService gpioSimple_two;
+    private GpioPortConfigService gpioSimpleInput;
     private static final String GpioTag = "GPIO Direction";
 
     /**
@@ -29,6 +30,7 @@ public class GpioPortsConfigs implements IGpioPortsConfigs {
     public GpioPortsConfigs() {
         this.setGpioSimple();
         this.setGpioSimpleTwo();
+        this.setupSimpleGpioInput();
     }
 
     /**
@@ -37,6 +39,7 @@ public class GpioPortsConfigs implements IGpioPortsConfigs {
     public void confiugureGpioPorts() {
         this.gpioSimple.ConfigurePort();
         this.gpioSimple_two.ConfigurePort();
+        this.gpioSimpleInput.ConfigurePort();
     }
 
     /**
@@ -45,6 +48,7 @@ public class GpioPortsConfigs implements IGpioPortsConfigs {
     public void closeGpioPorts() {
         this.gpioSimple.ResetPort();
         this.gpioSimple_two.ResetPort();
+        this.gpioSimpleInput.ResetPort();
     }
 
     /**
@@ -92,5 +96,31 @@ public class GpioPortsConfigs implements IGpioPortsConfigs {
             Log.d(this.GpioTag,"Error");
         }
 
+    }
+
+    private void setupSimpleGpioInput() {
+        //Initializing the config classes with their respective Port Names and settings.
+        this.gpioSimpleInput = new GpioPortConfigService(RaspberyPiPortsConstants.GPIO_PIN_29, RaspberyPiPortsConstants.GPIO_DIRECTION_IN);
+        try {
+            this.gpioSimpleInput.setGpioPortConfigCallbackListener(new IGpioPortConfigCallbackListener() {
+                @Override
+                public void portCallback(Gpio gpioPort) throws IOException {
+
+                    if (gpioPort.getValue()) {
+                        Log.d("Input port", new Boolean(gpioPort.getValue()).toString());
+                        /**
+                         * Example: you can get the port like the example below and change the values of the port
+                         * GpioPortsConfigs.this.gpioSimpleInput.getPort();
+                         * GpioPortsConfigs.this.gpioSimple.getPort().setValue(false);
+                         */
+                        // Pin is LOW
+                    } else {
+                        // Pin is HIGH
+                    }
+                }
+            });
+        } catch (GpioPortDirectionException e) {
+            Log.d(this.GpioTag,"Error");
+        }
     }
 }
