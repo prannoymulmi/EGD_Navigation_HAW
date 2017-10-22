@@ -1,4 +1,4 @@
-package navigation.egd.haw.egd_navigation_cj2.Exceptions;
+package navigation.egd.haw.egd_navigation_cj2.customExceptions;
 
 /**
  * @author Prannoy

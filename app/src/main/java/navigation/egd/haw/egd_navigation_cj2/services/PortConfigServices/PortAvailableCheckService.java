@@ -4,7 +4,7 @@ import com.google.android.things.pio.PeripheralManagerService;
 
 import java.util.List;
 
-import navigation.egd.haw.egd_navigation_cj2.Exceptions.GPIOPortsNotAvailableException;
+import navigation.egd.haw.egd_navigation_cj2.customExceptions.GPIOPortsNotAvailableException;
 
 /**
  * @author Prannoy
