@@ -8,6 +8,7 @@ import java.io.IOException;
 import navigation.egd.haw.egd_navigation_cj2.Exceptions.GPIOPortsNotAvailableException;
 import navigation.egd.haw.egd_navigation_cj2.constants.RaspberyPiPortsConstants;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IGpioPortConfigCallbackListener;
+import navigation.egd.haw.egd_navigation_cj2.services.PortAvailableCheckService;
 
 /**
  * @author Prannoy
@@ -15,7 +16,7 @@ import navigation.egd.haw.egd_navigation_cj2.listeners.IGpioPortConfigCallbackLi
  * https://developer.android.com/things/sdk/pio/gpio.htmls
  */
 
-public class GPIOPortInputConfigService extends GPIOPortAvailableCheckService {
+public class GPIOPortInputConfigService extends PortAvailableCheckService {
 
     private Gpio gpioPort;
     private IGpioPortConfigCallbackListener listner;
@@ -34,7 +35,6 @@ public class GPIOPortInputConfigService extends GPIOPortAvailableCheckService {
         final String TAG = "Configure Port Input";
 
         try{
-            super.isPortAvailable(portName);
             gpioPort = super.service.openGpio(portName);
             // Initialize the pin as an input
             gpioPort.setDirection(RaspberyPiPortsConstants.GPIO_DIRECTION_IN);
@@ -47,8 +47,6 @@ public class GPIOPortInputConfigService extends GPIOPortAvailableCheckService {
 
         } catch (IOException e) {
             Log.e(TAG, "Error on PeripheralIO API", e);
-        } catch (GPIOPortsNotAvailableException e) {
-            Log.e(TAG, portName + " Port not Free", e);
         }
     }
 

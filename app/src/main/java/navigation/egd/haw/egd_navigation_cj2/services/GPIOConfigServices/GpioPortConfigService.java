@@ -3,7 +3,6 @@ package navigation.egd.haw.egd_navigation_cj2.services.GPIOConfigServices;
 import com.google.android.things.pio.Gpio;
 import com.google.android.things.pio.PeripheralManagerService;
 
-import navigation.egd.haw.egd_navigation_cj2.Exceptions.GpioPortDirectionException;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IGpioPortConfigCallbackListener;
 import navigation.egd.haw.egd_navigation_cj2.constants.RaspberyPiPortsConstants;
 
@@ -69,7 +68,7 @@ public class GpioPortConfigService {
 
 
     //----------------------- Getters and Setters ----------------
-    public void setGpioPortConfigCallbackListener(IGpioPortConfigCallbackListener listner) throws GpioPortDirectionException {
+    public void setGpioPortConfigCallbackListener(IGpioPortConfigCallbackListener listner) {
         if(gpioPortOutputConfigService != null) {
             gpioPortOutputConfigService.setGpioPortConfigCallbackListener(listner);
         }
