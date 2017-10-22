@@ -18,8 +18,8 @@ import navigation.egd.haw.egd_navigation_cj2.services.PortConfigServices.GPIOCon
 
 public class GpioPortsConfigs implements IGpioPortsConfigs {
     //Declaring the GpioConfigCongtoller classes
-    private GpioPortConfigService gpioSimple;
-    private GpioPortConfigService gpioSimple_two;
+    private GpioPortConfigService gpioSimpleOutput;
+    private GpioPortConfigService gpioSimpleOutputTwo;
     private GpioPortConfigService gpioSimpleInput;
     private static final String GpioTag = "GPIO Direction";
 
@@ -36,8 +36,8 @@ public class GpioPortsConfigs implements IGpioPortsConfigs {
      * Configures all the GPIO ports that are declared
      */
     public void confiugureGpioPorts() {
-        this.gpioSimple.ConfigurePort();
-        this.gpioSimple_two.ConfigurePort();
+        this.gpioSimpleOutput.ConfigurePort();
+        this.gpioSimpleOutputTwo.ConfigurePort();
         this.gpioSimpleInput.ConfigurePort();
     }
 
@@ -45,8 +45,8 @@ public class GpioPortsConfigs implements IGpioPortsConfigs {
      * Resets the GPIO Ports
      */
     public void closeGpioPorts() {
-        this.gpioSimple.ResetPort();
-        this.gpioSimple_two.ResetPort();
+        this.gpioSimpleOutput.ResetPort();
+        this.gpioSimpleOutputTwo.ResetPort();
         this.gpioSimpleInput.ResetPort();
     }
 
@@ -54,8 +54,8 @@ public class GpioPortsConfigs implements IGpioPortsConfigs {
      * Setting up GPIO Ports
      */
     private void setGpioSimple(){
-        this.gpioSimple = new GpioPortConfigService(RaspberyPiPortsConstants.GPIO_PIN_16, RaspberyPiPortsConstants.GPIO_DIRECTION_OUT_INITIALLY_HIGH);
-        this.gpioSimple.setGpioPortConfigCallbackListener(new IGpioPortConfigCallbackListener() {
+        this.gpioSimpleOutput = new GpioPortConfigService(RaspberyPiPortsConstants.GPIO_PIN_16, RaspberyPiPortsConstants.GPIO_DIRECTION_OUT_INITIALLY_HIGH);
+        this.gpioSimpleOutput.setGpioPortConfigCallbackListener(new IGpioPortConfigCallbackListener() {
             @Override
             public void portCallback(Gpio gpioPort) throws IOException {
                 gpioPort.setValue(!gpioPort.getValue());
@@ -69,11 +69,11 @@ public class GpioPortsConfigs implements IGpioPortsConfigs {
 
     private void setGpioSimpleTwo(){
         //Initializing the config classes with their respective Port Names and settings.
-        this.gpioSimple_two = new GpioPortConfigService(RaspberyPiPortsConstants.GPIO_PIN_31, RaspberyPiPortsConstants.GPIO_DIRECTION_OUT_INITIALLY_LOW);
+        this.gpioSimpleOutputTwo = new GpioPortConfigService(RaspberyPiPortsConstants.GPIO_PIN_31, RaspberyPiPortsConstants.GPIO_DIRECTION_OUT_INITIALLY_LOW);
 
         //Adding a callback methods for the GPIO port with the help of a listner
         //An Example of a listner where you have a conditional statement
-        this.gpioSimple_two.setGpioPortConfigCallbackListener(new IGpioPortConfigCallbackListener() {
+        this.gpioSimpleOutputTwo.setGpioPortConfigCallbackListener(new IGpioPortConfigCallbackListener() {
             private boolean isFirstRun = true;
             @Override
             public void portCallback(Gpio gpioPort) throws IOException {
@@ -103,7 +103,7 @@ public class GpioPortsConfigs implements IGpioPortsConfigs {
                     /**
                      * Example: you can get the port like the example below and change the values of the port
                      * GpioPortsConfigs.this.gpioSimpleInput.getPort();
-                     * GpioPortsConfigs.this.gpioSimple.getPort().setValue(false);
+                     * GpioPortsConfigs.this.gpioSimpleOutput.getPort().setValue(false);
                      */
                     // Pin is LOW
                 } else {
