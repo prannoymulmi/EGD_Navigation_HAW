@@ -16,13 +16,15 @@ public class NavigationMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_navigation_main);
 
         //This is just a demo for using the GPIO ports
-        this.demo = new GpioPortsConfigs();
-        this.demo.confiugureGpioPorts();
+        //this.demo = new GpioPortsConfigs();
+        //this.demo.confiugureGpioPorts();
+        this.manager = new NavigationManger();
+        this.manager.run();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        this.demo.closeGpioPorts();
+        //this.demo.closeGpioPorts();
     }
 }

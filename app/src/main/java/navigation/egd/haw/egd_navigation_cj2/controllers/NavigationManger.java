@@ -1,7 +1,7 @@
 package navigation.egd.haw.egd_navigation_cj2.controllers;
 
-
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationManager;
+
 import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.DirectionAPIService;
 import navigation.egd.haw.egd_navigation_cj2.services.GPSServices.GPSService;
 import navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices.NavigationIOProcessService;
@@ -12,7 +12,7 @@ import navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices.Navig
  * Created by prann on 10/20/2017.
  */
 
-public class NavigationManger implements INavigationManager {
+public class NavigationManger  implements INavigationManager {
 
     private DirectionAPIService apiService;
     private GPSService gpsService;
@@ -24,6 +24,9 @@ public class NavigationManger implements INavigationManager {
         this.navigationIOProcessService = new NavigationIOProcessService();
     }
 
+    public void run() {
+         this.apiService.getDirections();
+    }
 
     //------------------Getters and setters-----------------
     @Override
