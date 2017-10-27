@@ -72,4 +72,9 @@ public class AsyncTaskUtil extends AsyncTask<Object, Void, Object> {
     protected void onCancelled(Object o) {
         super.onCancelled(o);
     }
+
+    public void onDestroy() {
+        asyncTaskListener = null;
+        asyncTaskListenerOnFinish = null;
+    }
 }
