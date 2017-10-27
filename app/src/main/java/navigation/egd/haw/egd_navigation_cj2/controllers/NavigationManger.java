@@ -1,7 +1,11 @@
 package navigation.egd.haw.egd_navigation_cj2.controllers;
 
+import android.util.Log;
+
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationManager;
 
+import navigation.egd.haw.egd_navigation_cj2.listeners.IAsyncTaskListenerOnFinish;
+import navigation.egd.haw.egd_navigation_cj2.models.DirectionAPI.DirectionAPI;
 import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.DirectionAPIService;
 import navigation.egd.haw.egd_navigation_cj2.services.GPSServices.GPSService;
 import navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices.NavigationIOProcessService;
@@ -13,25 +17,29 @@ import navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices.Navig
  */
 
 public class NavigationManger  implements INavigationManager {
-
-    private DirectionAPIService apiService;
+    private DirectionAPIService directionAPIService;
     private GPSService gpsService;
     private NavigationIOProcessService navigationIOProcessService;
 
     public NavigationManger() {
-        this.apiService = new DirectionAPIService();
+        this.directionAPIService = new DirectionAPIService();
         this.gpsService = new GPSService();
         this.navigationIOProcessService = new NavigationIOProcessService();
     }
 
     public void run() {
-         this.apiService.getDirections();
+        this.directionAPIService.setOnProcessFinish(new IAsyncTaskListenerOnFinish() {
+            @Override
+            public void onProcessFinish(Object result) {
+              Log.d("finished", result.toString());
+            }
+        });
+        this.directionAPIService.getDirections();
     }
 
     //------------------Getters and setters-----------------
-    @Override
-    public DirectionAPIService getApiService() {
-        return apiService;
+    public DirectionAPIService getDirectionAPIService() {
+        return directionAPIService;
     }
 
     @Override
@@ -43,4 +51,5 @@ public class NavigationManger  implements INavigationManager {
     public NavigationIOProcessService getNavigationIOProcessService() {
         return navigationIOProcessService;
     }
+
 }

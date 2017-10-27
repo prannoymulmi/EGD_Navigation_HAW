@@ -1,9 +1,12 @@
 
 package navigation.egd.haw.egd_navigation_cj2.models.DirectionAPI;
 
+import java.lang.reflect.Type;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class DirectionAPI {
 
@@ -41,4 +44,11 @@ public class DirectionAPI {
         this.status = status;
     }
 
+    //Returns a Json String from the GSON
+    public String toString() {
+        Gson gson = new Gson();
+        Type type = new TypeToken<DirectionAPI>() {}.getType();
+        String json = gson.toJson(this, type);
+        return json;
+    }
 }
