@@ -19,7 +19,6 @@ import navigation.egd.haw.egd_navigation_cj2.utils.AsyncTaskUtil;
  */
 
 public class DirectionAPIService {
-    private IDirectionAPIService mDirectionApi;
     private AsyncTaskUtil asyncTaskUtil;
     private DirectionAPIMiddleware directionAPIMiddleware;
     private DirectionAPI results;
