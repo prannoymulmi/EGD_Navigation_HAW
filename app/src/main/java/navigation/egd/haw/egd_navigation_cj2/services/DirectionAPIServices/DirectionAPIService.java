@@ -2,6 +2,9 @@ package navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices;
 
 import android.util.Log;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import navigation.egd.haw.egd_navigation_cj2.constants.APIConstants;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IAsyncTaskListener;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IAsyncTaskListenerOnFinish;
@@ -42,12 +45,15 @@ public class DirectionAPIService {
             }
         });
 
+    }
+
+    public void getDirections(final String mode, final String origin, final String destination, final String key, final Map<String,String> queries) {
         asyncTaskUtil.setAsyncTaskListener(new IAsyncTaskListener() {
             @Override
             public Object asyncTaskCallback(Object... objects)  {
                 DirectionAPI directions = null;
                 try {
-                    directions = directionAPIMiddleware.getWalkingDirections("walking", "Spannskamp 26","barmbek", APIConstants.GOOGLE_DIRECTIONS_API_KEY);
+                    directions = directionAPIMiddleware.getWalkingDirections(mode,origin, destination, key, queries);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -55,11 +61,6 @@ public class DirectionAPIService {
                 return directions;
             }
         });
-
-
-    }
-
-    public void getDirections() {
         asyncTaskUtil.execute();
     }
 

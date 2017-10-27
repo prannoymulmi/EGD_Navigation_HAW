@@ -2,8 +2,12 @@ package navigation.egd.haw.egd_navigation_cj2.controllers;
 
 import android.util.Log;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationManager;
 
+import navigation.egd.haw.egd_navigation_cj2.constants.APIConstants;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IAsyncTaskListenerOnFinish;
 import navigation.egd.haw.egd_navigation_cj2.models.DirectionAPI.DirectionAPI;
 import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.DirectionAPIService;
@@ -34,7 +38,8 @@ public class NavigationManger  implements INavigationManager {
               Log.d("finished", result.toString());
             }
         });
-        this.directionAPIService.getDirections();
+        Map<String, String> queries = new HashMap<>();
+        this.directionAPIService.getDirections("walking", "Spannskamp 26","barmbek", APIConstants.GOOGLE_DIRECTIONS_API_KEY, queries);
     }
 
     //------------------Getters and setters-----------------
