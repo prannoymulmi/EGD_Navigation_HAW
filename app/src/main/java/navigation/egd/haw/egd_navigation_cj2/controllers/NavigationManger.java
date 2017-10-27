@@ -9,7 +9,6 @@ import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationManager;
 
 import navigation.egd.haw.egd_navigation_cj2.constants.APIConstants;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IAsyncTaskListenerOnFinish;
-import navigation.egd.haw.egd_navigation_cj2.models.DirectionAPI.DirectionAPI;
 import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.DirectionAPIService;
 import navigation.egd.haw.egd_navigation_cj2.services.GPSServices.GPSService;
 import navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices.NavigationIOProcessService;
@@ -39,7 +38,7 @@ public class NavigationManger  implements INavigationManager {
             }
         });
         Map<String, String> queries = new HashMap<>();
-        this.directionAPIService.getDirections("walking", "Spannskamp 26","barmbek", APIConstants.GOOGLE_DIRECTIONS_API_KEY, queries);
+        this.directionAPIService.getDirections(APIConstants.MODE_WALKING, "Spannskamp 26","barmbek", APIConstants.GOOGLE_DIRECTIONS_API_KEY, queries);
     }
 
     //------------------Getters and setters-----------------

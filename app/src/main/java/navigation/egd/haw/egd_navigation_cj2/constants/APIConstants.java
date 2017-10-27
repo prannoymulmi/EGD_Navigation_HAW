@@ -12,4 +12,5 @@ public class APIConstants {
     //TODO: replace with Real API KEYS
     public static String GOOGLE_DIRECTIONS_API_KEY = "AIzaSyBPVLp0tiS_bvL3OCRS1Mnwq_WiLW5myhE";
     public static String GOOGLE_DIRECTIONS_API_BASE_URL = "https://maps.googleapis.com/";
+    public static String MODE_WALKING= "walking";
 }

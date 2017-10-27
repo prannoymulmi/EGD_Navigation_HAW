@@ -8,6 +8,10 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * @author Prannoy
+ * This is a model the description of Google Direction API return data
+ */
 public class DirectionAPI {
 
     @SerializedName("geocoded_waypoints")
