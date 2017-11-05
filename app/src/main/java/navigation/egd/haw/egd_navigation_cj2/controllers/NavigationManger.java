@@ -34,6 +34,7 @@ import navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices.Navig
  */
 
 public class NavigationManger  implements INavigationManager {
+    //Injection of the objects using dagger
     @Inject IDirection directionAPIService;
     @Inject IGpsService gpsService;
     @Inject INavIO navigationIOProcessService;
@@ -50,8 +51,6 @@ public class NavigationManger  implements INavigationManager {
                 .iOComponent(ioComponent)
                 .build()
                 .inject(this);
-
-        this.navigationIOProcessService = new NavigationIOProcessService();
     }
 
     public void run() {
