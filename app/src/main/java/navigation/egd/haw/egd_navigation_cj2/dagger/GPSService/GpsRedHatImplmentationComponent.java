@@ -8,5 +8,5 @@ import dagger.Component;
  */
 
 @Component(modules = GpsServiceModule.class)
-public interface GpsRedHatImplmentationComponent extends GPSComponent {
+public interface GpsRedHatImplmentationComponent extends GpsComponent {
 }

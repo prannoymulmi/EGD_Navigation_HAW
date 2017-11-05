@@ -8,6 +8,6 @@ import navigation.egd.haw.egd_navigation_cj2.Interfaces.IGpsService;
  */
 
 
-public interface GPSComponent {
+public interface GpsComponent {
     IGpsService gpsService();
 }

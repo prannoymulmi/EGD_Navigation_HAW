@@ -5,13 +5,11 @@ import android.os.Bundle;
 
 import navigation.egd.haw.egd_navigation_cj2.controllers.GpioPortsConfigs;
 import navigation.egd.haw.egd_navigation_cj2.controllers.NavigationManger;
-import navigation.egd.haw.egd_navigation_cj2.dagger.DirectionAPI.DirectionComponent;
 
 public class NavigationMainActivity extends AppCompatActivity {
 
     NavigationManger manager;
     GpioPortsConfigs demo;
-    DirectionComponent directionComponent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +24,6 @@ public class NavigationMainActivity extends AppCompatActivity {
 
     }
 
-    public DirectionComponent getDirectionComponent () {
-        return directionComponent;
-    }
 
     @Override
     protected void onDestroy() {

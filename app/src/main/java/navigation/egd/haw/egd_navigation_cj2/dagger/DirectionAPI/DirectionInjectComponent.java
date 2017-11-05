@@ -2,9 +2,11 @@ package navigation.egd.haw.egd_navigation_cj2.dagger.DirectionAPI;
 
 import dagger.Component;
 import navigation.egd.haw.egd_navigation_cj2.controllers.NavigationManger;
-import navigation.egd.haw.egd_navigation_cj2.dagger.GPSService.GPSComponent;
+import navigation.egd.haw.egd_navigation_cj2.dagger.GPSService.GpsComponent;
+import navigation.egd.haw.egd_navigation_cj2.dagger.IOService.IOComponent;
 import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.GoogleAPIServices.GoogleAPIService;
 import navigation.egd.haw.egd_navigation_cj2.services.GPSServices.GPSService;
+import navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices.NavigationIOProcessService;
 
 /**
  * @
@@ -13,10 +15,13 @@ import navigation.egd.haw.egd_navigation_cj2.services.GPSServices.GPSService;
 
 @Component(dependencies = {
         DirectionComponent.class,
-        GPSComponent.class
+        GpsComponent.class,
+        IOComponent.class
 })
+
 public interface DirectionInjectComponent {
     GoogleAPIService directionApiService();
     GPSService gpsService();
+    NavigationIOProcessService ioService();
     void inject(NavigationManger manager);
 }
