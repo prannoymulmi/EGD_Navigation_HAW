@@ -2,6 +2,7 @@ package navigation.egd.haw.egd_navigation_cj2.services.PortConfigServices.UartCo
 
 import android.util.Log;
 
+import com.google.android.things.pio.PeripheralManagerService;
 import com.google.android.things.pio.UartDevice;
 
 import java.io.IOException;
@@ -23,12 +24,14 @@ public class UartConfigServices extends PortAvailableCheckService implements IUa
     private int baudRate;
     private int dataSize;
     private int stopBits;
+    private static String UART_DEVICE_NAME;
 
-    public UartConfigServices(String uartPortName, int baudRate, int dataSize, int stopBits) {
+    public UartConfigServices(String uartPortName, int baudRate, int dataSize, int stopBits, String UART_DEVICE_NAME) {
         this.uartPortName = uartPortName;
         this.baudRate= baudRate;
         this.dataSize = dataSize;
         this.stopBits = stopBits;
+        this.UART_DEVICE_NAME = UART_DEVICE_NAME;
     }
 
     //Must be more generic
@@ -45,10 +48,34 @@ public class UartConfigServices extends PortAvailableCheckService implements IUa
         }
     }
 
-    /**
-     * TODO: Reading and wrting methods missing
-     */
 
+    public void writeUartData(UartDevice uart) throws IOException {
+        byte[] buffer = {};
+        int count = uart.write(buffer, buffer.length);
+        Log.d("Test: UART writing", "Wrote " + count + " bytes to peripheral");
+    }
+    public void readUartBuffer(UartDevice uart) throws IOException {
+        // Maximum amount of data to read at one time
+        final int maxCount = dataSize;
+        byte[] buffer = new byte[maxCount];
+
+        int count;
+        while ((count = uart.read(buffer, buffer.length)) > 0) {
+            Log.d("Test: UART listening", "Read " + count + " bytes from peripheral");
+        }
+    }
+
+
+    public void openUartPort() {
+
+        // Attempt to access the UART device
+        try {
+            PeripheralManagerService manager = new PeripheralManagerService();
+            mDevice = manager.openUartDevice(UART_DEVICE_NAME);
+        } catch (IOException e) {
+            Log.w("TEST: UART open", "Unable to access UART device", e);
+        }
+    }
     @Override
     public void closeUartPorts() {
         if (mDevice != null) {
