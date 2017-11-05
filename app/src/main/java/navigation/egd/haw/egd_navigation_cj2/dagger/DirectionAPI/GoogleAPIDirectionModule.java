@@ -1,11 +1,9 @@
-package navigation.egd.haw.egd_navigation_cj2.dagger.modules;
-
-import javax.inject.Singleton;
+package navigation.egd.haw.egd_navigation_cj2.dagger.DirectionAPI;
 
 import dagger.Binds;
 import dagger.Module;
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.IDirection;
-import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.DirectionAPIService;
+import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.GoogleAPIServices.GoogleAPIService;
 
 
 /**
@@ -24,9 +22,10 @@ import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.Direc
     # Fragility. If we change one part of program the other parts will have got uncontrolled errors.
     # Immobility. The single module can be hardly separated from the rest part of the application to be used again.*
  * Created by prann on 11/4/2017.
+ * A module which returns the IDirection interface with the specific GoogleAPI Service.
  */
 
 @Module
 public interface GoogleAPIDirectionModule {
-    @Binds IDirection idirection(DirectionAPIService directionAPIService);
+    @Binds IDirection idirection(GoogleAPIService googleAPIService);
 }

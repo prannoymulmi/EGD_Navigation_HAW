@@ -1,6 +1,6 @@
 package navigation.egd.haw.egd_navigation_cj2.Interfaces;
 
-import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.DirectionAPIService;
+import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.GoogleAPIServices.GoogleAPIService;
 import navigation.egd.haw.egd_navigation_cj2.services.GPSServices.GPSService;
 import navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices.NavigationIOProcessService;
 
@@ -11,7 +11,7 @@ import navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices.Navig
  */
 
 public interface INavigationManager {
-     DirectionAPIService getDirectionAPIService();
+     GoogleAPIService getDirectionAPIService();
      GPSService getGpsService();
      NavigationIOProcessService getNavigationIOProcessService() ;
 }

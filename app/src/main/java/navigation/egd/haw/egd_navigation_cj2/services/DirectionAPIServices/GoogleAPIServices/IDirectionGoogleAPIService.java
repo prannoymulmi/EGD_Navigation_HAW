@@ -1,6 +1,5 @@
-package navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices;
+package navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.GoogleAPIServices;
 
-import java.util.List;
 import java.util.Map;
 
 import navigation.egd.haw.egd_navigation_cj2.models.DirectionAPI.DirectionAPI;
@@ -16,7 +15,7 @@ import retrofit2.http.QueryMap;
  * @see <a href=https://google-developers.appspot.com/maps/documentation/directions/intro/>
  */
 
-public interface IDirectionAPIService {
+public interface IDirectionGoogleAPIService {
 
     @GET("maps/api/directions/json")
     Call <DirectionAPI> getWalkingDirections(

@@ -8,14 +8,19 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.IDirection;
+import navigation.egd.haw.egd_navigation_cj2.Interfaces.IGpsService;
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationManager;
 
 import navigation.egd.haw.egd_navigation_cj2.constants.APIConstants;
-import navigation.egd.haw.egd_navigation_cj2.dagger.components.DaggerDirectionGoogleAPIComponent;
-import navigation.egd.haw.egd_navigation_cj2.dagger.components.DaggerDirectionInjectComponent;
-import navigation.egd.haw.egd_navigation_cj2.dagger.components.DirectionComponent;
+
+
+import navigation.egd.haw.egd_navigation_cj2.dagger.DirectionAPI.DaggerDirectionGoogleAPIComponent;
+import navigation.egd.haw.egd_navigation_cj2.dagger.DirectionAPI.DaggerDirectionInjectComponent;
+import navigation.egd.haw.egd_navigation_cj2.dagger.DirectionAPI.DirectionComponent;
+import navigation.egd.haw.egd_navigation_cj2.dagger.GPSService.DaggerGpsRedHatImplmentationComponent;
+import navigation.egd.haw.egd_navigation_cj2.dagger.GPSService.GPSComponent;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IAsyncTaskListenerOnFinish;
-import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.DirectionAPIService;
+import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.GoogleAPIServices.GoogleAPIService;
 import navigation.egd.haw.egd_navigation_cj2.services.GPSServices.GPSService;
 import navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices.NavigationIOProcessService;
 
@@ -27,15 +32,19 @@ import navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices.Navig
 
 public class NavigationManger  implements INavigationManager {
     @Inject IDirection directionAPIService;
-    private GPSService gpsService;
+    @Inject IGpsService gpsService;
     private NavigationIOProcessService navigationIOProcessService;
 
     @Inject
     public NavigationManger() {
         DirectionComponent component = DaggerDirectionGoogleAPIComponent.create();
-        DaggerDirectionInjectComponent.builder().directionComponent(component).build().inject(this);
+        GPSComponent gpsComponent = DaggerGpsRedHatImplmentationComponent.create();
+        DaggerDirectionInjectComponent.builder()
+                .directionComponent(component)
+                .gPSComponent(gpsComponent)
+                .build()
+                .inject(this);
 
-        this.gpsService = new GPSService();
         this.navigationIOProcessService = new NavigationIOProcessService();
     }
 
@@ -47,17 +56,17 @@ public class NavigationManger  implements INavigationManager {
             }
         });
         Map<String, String> queries = new HashMap<>();
-        this.directionAPIService.getDirections(APIConstants.MODE_WALKING, "Spannskamp 26","barmbek", APIConstants.GOOGLE_DIRECTIONS_API_KEY, queries);
+        this.directionAPIService.getDirections(APIConstants.MODE_WALKING, "Spannskamp 26","berliner tor 7", APIConstants.GOOGLE_DIRECTIONS_API_KEY, queries);
     }
 
     //------------------Getters and setters-----------------
-    public DirectionAPIService getDirectionAPIService() {
+    public GoogleAPIService getDirectionAPIService() {
         return null;
     }
 
     @Override
     public GPSService getGpsService() {
-        return gpsService;
+        return null;
     }
 
     @Override

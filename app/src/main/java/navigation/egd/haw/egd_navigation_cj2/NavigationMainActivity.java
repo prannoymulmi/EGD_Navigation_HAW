@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import navigation.egd.haw.egd_navigation_cj2.controllers.GpioPortsConfigs;
 import navigation.egd.haw.egd_navigation_cj2.controllers.NavigationManger;
-import navigation.egd.haw.egd_navigation_cj2.dagger.components.DirectionComponent;
+import navigation.egd.haw.egd_navigation_cj2.dagger.DirectionAPI.DirectionComponent;
 
 public class NavigationMainActivity extends AppCompatActivity {
 
@@ -20,13 +20,7 @@ public class NavigationMainActivity extends AppCompatActivity {
         //This is just a demo for using the GPIO ports
         //this.demo = new GpioPortsConfigs();
         //this.demo.confiugureGpioPorts();
-//        directionComponent = DaggerDirectionComponent
-//                .builder()
-//                .directionModule(new DirectionModule())
-//                .build();
 
-//        DirectionComponent component = DaggerDirectionGoogleAPIComponent.create();
-//        DaggerDirectionInjectComponent.builder().directionComponent(component).build();
         this.manager = new NavigationManger();
         this.manager.run();
 

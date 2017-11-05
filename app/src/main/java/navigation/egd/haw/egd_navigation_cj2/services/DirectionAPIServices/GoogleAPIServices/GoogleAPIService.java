@@ -1,8 +1,7 @@
-package navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices;
+package navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.GoogleAPIServices;
 
 import android.util.Log;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -20,17 +19,17 @@ import navigation.egd.haw.egd_navigation_cj2.utils.AsyncTaskUtil;
  * Created by prann on 10/20/2017.
  */
 
-public class DirectionAPIService implements IDirection{
+public class GoogleAPIService implements IDirection{
     private AsyncTaskUtil asyncTaskUtil;
-    private DirectionAPIMiddleware directionAPIMiddleware;
+    private GoogleAPIMiddleware googleAPIMiddleware;
     private DirectionAPI results;
     public IAsyncTaskListenerOnFinish asyncTaskListenerOnFinish;
 
 
 
     @Inject
-    public DirectionAPIService()  {
-        directionAPIMiddleware = new DirectionAPIMiddleware();
+    public GoogleAPIService()  {
+        googleAPIMiddleware = new GoogleAPIMiddleware();
 
         results = new DirectionAPI();
         asyncTaskUtil = new AsyncTaskUtil();
@@ -55,7 +54,7 @@ public class DirectionAPIService implements IDirection{
             public Object asyncTaskCallback(Object... objects)  {
                 DirectionAPI directions = null;
                 try {
-                    directions = directionAPIMiddleware.getWalkingDirections(mode,origin, destination, key, queries);
+                    directions = googleAPIMiddleware.getWalkingDirections(mode,origin, destination, key, queries);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

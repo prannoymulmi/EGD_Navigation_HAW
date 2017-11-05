@@ -1,10 +1,10 @@
-package navigation.egd.haw.egd_navigation_cj2.dagger.components;
+package navigation.egd.haw.egd_navigation_cj2.dagger.DirectionAPI;
 
 import dagger.Component;
-import navigation.egd.haw.egd_navigation_cj2.dagger.modules.GoogleAPIDirectionModule;
 
 /**
- * @author
+ * @author prannoy
+ * A Dagger component which exposes the GoogleDirectionApi module
  * Created by prann on 11/5/2017.
  */
 
