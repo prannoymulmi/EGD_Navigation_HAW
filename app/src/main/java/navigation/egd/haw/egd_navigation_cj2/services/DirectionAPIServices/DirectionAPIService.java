@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import navigation.egd.haw.egd_navigation_cj2.constants.APIConstants;
+import javax.inject.Inject;
+
+import navigation.egd.haw.egd_navigation_cj2.Interfaces.IDirection;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IAsyncTaskListener;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IAsyncTaskListenerOnFinish;
 import navigation.egd.haw.egd_navigation_cj2.models.DirectionAPI.DirectionAPI;
@@ -18,7 +20,7 @@ import navigation.egd.haw.egd_navigation_cj2.utils.AsyncTaskUtil;
  * Created by prann on 10/20/2017.
  */
 
-public class DirectionAPIService {
+public class DirectionAPIService implements IDirection{
     private AsyncTaskUtil asyncTaskUtil;
     private DirectionAPIMiddleware directionAPIMiddleware;
     private DirectionAPI results;
@@ -26,6 +28,7 @@ public class DirectionAPIService {
 
 
 
+    @Inject
     public DirectionAPIService()  {
         directionAPIMiddleware = new DirectionAPIMiddleware();
 
