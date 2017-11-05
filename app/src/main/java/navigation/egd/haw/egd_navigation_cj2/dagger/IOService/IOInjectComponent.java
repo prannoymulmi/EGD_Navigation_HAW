@@ -1,5 +1,7 @@
 package navigation.egd.haw.egd_navigation_cj2.dagger.IOService;
 
+import javax.inject.Singleton;
+
 import dagger.Component;
 
 /**
@@ -8,5 +10,6 @@ import dagger.Component;
  */
 
 @Component(modules = IONavModule.class)
+@Singleton
 public interface IOInjectComponent extends IOComponent {
 }

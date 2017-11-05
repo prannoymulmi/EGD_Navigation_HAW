@@ -1,5 +1,7 @@
 package navigation.egd.haw.egd_navigation_cj2.dagger.DirectionAPI;
 
+import javax.inject.Singleton;
+
 import dagger.Component;
 
 /**
@@ -9,6 +11,7 @@ import dagger.Component;
  */
 
 @Component(modules = GoogleAPIDirectionModule.class)
+@Singleton
 interface DirectionGoogleAPIComponent extends DirectionComponent {
 
 }
