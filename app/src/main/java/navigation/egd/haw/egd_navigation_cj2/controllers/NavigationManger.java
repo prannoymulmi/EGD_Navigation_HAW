@@ -9,7 +9,7 @@ import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationManager;
 
 import navigation.egd.haw.egd_navigation_cj2.constants.APIConstants;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IAsyncTaskListenerOnFinish;
-import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.DirectionAPIService;
+import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.GoogleDirectionAPIService.GoogleDirectionApiService;
 import navigation.egd.haw.egd_navigation_cj2.services.GPSServices.GPSService;
 import navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices.NavigationIOProcessService;
 
@@ -20,30 +20,30 @@ import navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices.Navig
  */
 
 public class NavigationManger  implements INavigationManager {
-    private DirectionAPIService directionAPIService;
+    private GoogleDirectionApiService googleDirectionApiService;
     private GPSService gpsService;
     private NavigationIOProcessService navigationIOProcessService;
 
     public NavigationManger() {
-        this.directionAPIService = new DirectionAPIService();
+        this.googleDirectionApiService = new GoogleDirectionApiService();
         this.gpsService = new GPSService();
         this.navigationIOProcessService = new NavigationIOProcessService();
     }
 
     public void run() {
-        this.directionAPIService.setOnProcessFinish(new IAsyncTaskListenerOnFinish() {
+        this.googleDirectionApiService.setOnProcessFinish(new IAsyncTaskListenerOnFinish() {
             @Override
             public void onProcessFinish(Object result) {
               Log.d("finished", result.toString());
             }
         });
         Map<String, String> queries = new HashMap<>();
-        this.directionAPIService.getDirections(APIConstants.MODE_WALKING, "Spannskamp 26","barmbek", APIConstants.GOOGLE_DIRECTIONS_API_KEY, queries);
+        this.googleDirectionApiService.getDirections(APIConstants.MODE_WALKING, "Spannskamp 26","barmbek", APIConstants.GOOGLE_DIRECTIONS_API_KEY, queries);
     }
 
     //------------------Getters and setters-----------------
-    public DirectionAPIService getDirectionAPIService() {
-        return directionAPIService;
+    public GoogleDirectionApiService getGoogleDirectionApiService() {
+        return googleDirectionApiService;
     }
 
     @Override

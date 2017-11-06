@@ -1,11 +1,9 @@
 package navigation.egd.haw.egd_navigation_cj2.dagger.GoogleServiceAPI;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 import navigation.egd.haw.egd_navigation_cj2.models.DirectionAPI.DirectionAPI;
-import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.DirectionAPIMiddleware;
+import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.GoogleDirectionAPIService.GoogleDirectionApiMiddleware;
 
 /**
  *
@@ -15,8 +13,8 @@ import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.Direc
 @Module
 public class GoogleServiceApiModule {
     @Provides
-    DirectionAPIMiddleware directionAPIMiddleware() {
-        return new DirectionAPIMiddleware();
+    GoogleDirectionApiMiddleware directionAPIMiddleware() {
+        return new GoogleDirectionApiMiddleware();
     }
 
     @Provides

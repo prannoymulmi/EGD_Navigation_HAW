@@ -1,8 +1,7 @@
-package navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices;
+package navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.GoogleDirectionAPIService;
 
 import android.util.Log;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -24,17 +23,18 @@ import navigation.egd.haw.egd_navigation_cj2.utils.AsyncTaskUtil;
  * Created by prann on 10/20/2017.
  */
 
-public class DirectionAPIService {
-    //Injection the dependcies using the @Inject annotations this is managed by the dagger framwork checks in the component which modules are to be included
+public class GoogleDirectionApiService {
+    //Injection the dependencies using the @Inject annotations this is managed by the dagger framework checks in the component which modules are to be included
     @Inject AsyncTaskUtil asyncTaskUtil;
-    @Inject DirectionAPIMiddleware directionAPIMiddleware;
+    @Inject GoogleDirectionApiMiddleware googleDirectionApiMiddleware;
     @Inject DirectionAPI results;
     public IAsyncTaskListenerOnFinish asyncTaskListenerOnFinish;
 
 
 
-    public DirectionAPIService()  {
+    public GoogleDirectionApiService()  {
         asyncTaskListenerOnFinish = null;
+        //This way the initialization of the dependencies are not done in this module which makes the dependencies loosely coupled
         DaggerGoogleServiceApiComponent.builder()
                 .asyncUtilModule(new AsyncUtilModule())
                 .googleServiceApiModule(new GoogleServiceApiModule())
@@ -60,7 +60,7 @@ public class DirectionAPIService {
             public Object asyncTaskCallback(Object... objects)  {
                 DirectionAPI directions = null;
                 try {
-                    directions = directionAPIMiddleware.getWalkingDirections(mode,origin, destination, key, queries);
+                    directions = googleDirectionApiMiddleware.getWalkingDirections(mode,origin, destination, key, queries);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
