@@ -7,13 +7,14 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import navigation.egd.haw.egd_navigation_cj2.Interfaces.IDirectionApi;
+import navigation.egd.haw.egd_navigation_cj2.Interfaces.IGpsService;
+import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationIOProcessService;
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationManager;
 
 import navigation.egd.haw.egd_navigation_cj2.constants.APIConstants;
+import navigation.egd.haw.egd_navigation_cj2.dagger.NavigationManager.DaggerNavigationManagerComponent;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IAsyncTaskListenerOnFinish;
-import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.GoogleDirectionAPIService.GoogleDirectionApiService;
-import navigation.egd.haw.egd_navigation_cj2.services.GPSServices.GPSService;
-import navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices.NavigationIOProcessService;
 
 /**
  * This class is responsible to communicate with all the services for the navigation
@@ -22,15 +23,15 @@ import navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices.Navig
  */
 
 public class NavigationManger  implements INavigationManager {
-    private GoogleDirectionApiService googleDirectionApiService;
-    private GPSService gpsService;
-    private NavigationIOProcessService navigationIOProcessService;
+    //The Abstractions of the services are being used so that they can be replaced by future implmentations
+    @Inject IGpsService gpsService;
+    @Inject INavigationIOProcessService navigationIOProcessService;
+    @Inject IDirectionApi googleDirectionApiService;
 
     @Inject
     public NavigationManger() {
-        this.googleDirectionApiService = new GoogleDirectionApiService();
-        this.gpsService = new GPSService();
-        this.navigationIOProcessService = new NavigationIOProcessService();
+        // All the dependencies being injected using dagger
+        DaggerNavigationManagerComponent.builder().build().inject(this);
     }
 
     public void run() {
@@ -43,20 +44,4 @@ public class NavigationManger  implements INavigationManager {
         Map<String, String> queries = new HashMap<>();
         this.googleDirectionApiService.getDirections(APIConstants.MODE_WALKING, "Spannskamp 26","barmbek", APIConstants.GOOGLE_DIRECTIONS_API_KEY, queries);
     }
-
-    //------------------Getters and setters-----------------
-    public GoogleDirectionApiService getGoogleDirectionApiService() {
-        return googleDirectionApiService;
-    }
-
-    @Override
-    public GPSService getGpsService() {
-        return gpsService;
-    }
-
-    @Override
-    public NavigationIOProcessService getNavigationIOProcessService() {
-        return navigationIOProcessService;
-    }
-
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 
+import navigation.egd.haw.egd_navigation_cj2.Interfaces.IDirectionApi;
 import navigation.egd.haw.egd_navigation_cj2.dagger.AsyncUtil.AsyncUtilModule;
 
 import navigation.egd.haw.egd_navigation_cj2.dagger.GoogleServiceAPI.DaggerGoogleServiceApiComponent;
@@ -23,7 +24,7 @@ import navigation.egd.haw.egd_navigation_cj2.utils.AsyncTaskUtil;
  * Created by prann on 10/20/2017.
  */
 
-public class GoogleDirectionApiService {
+public class GoogleDirectionApiService implements IDirectionApi{
     //Injection the dependencies using the @Inject annotations this is managed by the dagger framework checks in the component which modules are to be included
     @Inject AsyncTaskUtil asyncTaskUtil;
     @Inject GoogleDirectionApiMiddleware googleDirectionApiMiddleware;
@@ -32,6 +33,7 @@ public class GoogleDirectionApiService {
 
 
 
+    @Inject
     public GoogleDirectionApiService()  {
         asyncTaskListenerOnFinish = null;
         //This way the initialization of the dependencies are not done in this module which makes the dependencies loosely coupled
@@ -69,10 +71,6 @@ public class GoogleDirectionApiService {
             }
         });
         asyncTaskUtil.execute();
-    }
-
-    public AsyncTaskUtil getAsyncTaskUtil() {
-        return asyncTaskUtil;
     }
 
     public void setOnProcessFinish(IAsyncTaskListenerOnFinish listner) {
