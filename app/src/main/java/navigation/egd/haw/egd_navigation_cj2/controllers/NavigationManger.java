@@ -5,6 +5,8 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationManager;
 
 import navigation.egd.haw.egd_navigation_cj2.constants.APIConstants;
@@ -24,6 +26,7 @@ public class NavigationManger  implements INavigationManager {
     private GPSService gpsService;
     private NavigationIOProcessService navigationIOProcessService;
 
+    @Inject
     public NavigationManger() {
         this.googleDirectionApiService = new GoogleDirectionApiService();
         this.gpsService = new GPSService();
