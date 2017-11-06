@@ -38,7 +38,7 @@ public class NavigationManger  implements INavigationManager {
         this.googleDirectionApiService.setOnProcessFinish(new IAsyncTaskListenerOnFinish() {
             @Override
             public void onProcessFinish(Object result) {
-              Log.d("finished", result.toString());
+                Log.d("finished", result.toString());
             }
         });
         Map<String, String> queries = new HashMap<>();
