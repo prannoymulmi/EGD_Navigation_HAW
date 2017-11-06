@@ -5,7 +5,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import navigation.egd.haw.egd_navigation_cj2.constants.APIConstants;
+import javax.inject.Inject;
+
+
+import navigation.egd.haw.egd_navigation_cj2.dagger.AsyncUtil.AsyncUtilModule;
+
+import navigation.egd.haw.egd_navigation_cj2.dagger.GoogleServiceAPI.DaggerGoogleServiceApiComponent;
+import navigation.egd.haw.egd_navigation_cj2.dagger.GoogleServiceAPI.GoogleServiceApiModule;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IAsyncTaskListener;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IAsyncTaskListenerOnFinish;
 import navigation.egd.haw.egd_navigation_cj2.models.DirectionAPI.DirectionAPI;
@@ -19,19 +25,21 @@ import navigation.egd.haw.egd_navigation_cj2.utils.AsyncTaskUtil;
  */
 
 public class DirectionAPIService {
-    private AsyncTaskUtil asyncTaskUtil;
-    private DirectionAPIMiddleware directionAPIMiddleware;
-    private DirectionAPI results;
+    //Injection the dependcies using the @Inject annotations this is managed by the dagger framwork checks in the component which modules are to be included
+    @Inject AsyncTaskUtil asyncTaskUtil;
+    @Inject DirectionAPIMiddleware directionAPIMiddleware;
+    @Inject DirectionAPI results;
     public IAsyncTaskListenerOnFinish asyncTaskListenerOnFinish;
 
 
 
     public DirectionAPIService()  {
-        directionAPIMiddleware = new DirectionAPIMiddleware();
-
-        results = new DirectionAPI();
-        asyncTaskUtil = new AsyncTaskUtil();
         asyncTaskListenerOnFinish = null;
+        DaggerGoogleServiceApiComponent.builder()
+                .asyncUtilModule(new AsyncUtilModule())
+                .googleServiceApiModule(new GoogleServiceApiModule())
+                .build()
+                .inject(this);
 
         asyncTaskUtil.setAsyncTaskListenerOnFinish(new IAsyncTaskListenerOnFinish() {
             @Override
@@ -71,7 +79,4 @@ public class DirectionAPIService {
         asyncTaskListenerOnFinish = listner;
     }
 
-    public DirectionAPI getResults() {
-        return results;
-    }
 }
