@@ -13,5 +13,7 @@
     2) Fragility. If we change one part of program the other parts will have got uncontrolled errors.
     3) Immobility. The single module can be hardly separated from the rest part of the application to be used again.
 
+ # Dagger Framework details
+    //TODO: write the three question expalin about the annotations etc
  # References:
     1 https://android.jlelse.eu/dagger-2-part-i-basic-principles-graph-dependencies-scopes-3dfd032ccd82
