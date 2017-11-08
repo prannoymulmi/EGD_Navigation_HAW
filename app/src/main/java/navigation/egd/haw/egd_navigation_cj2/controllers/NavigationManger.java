@@ -1,5 +1,6 @@
 package navigation.egd.haw.egd_navigation_cj2.controllers;
 
+import android.content.Context;
 import android.util.Log;
 
 import java.util.HashMap;
@@ -12,6 +13,7 @@ import navigation.egd.haw.egd_navigation_cj2.Interfaces.IGpsService;
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationIOProcessService;
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationManager;
 
+import navigation.egd.haw.egd_navigation_cj2.Interfaces.INetworkCheckUtil;
 import navigation.egd.haw.egd_navigation_cj2.constants.APIConstants;
 import navigation.egd.haw.egd_navigation_cj2.dagger.NavigationManager.DaggerNavigationManagerComponent;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IAsyncTaskListenerOnFinish;
@@ -27,13 +29,20 @@ public class NavigationManger  implements INavigationManager {
     @Inject IGpsService gpsService;
     @Inject INavigationIOProcessService navigationIOProcessService;
     @Inject IDirectionApi googleDirectionApiService;
+    @Inject INetworkCheckUtil networkCheckUtil;
+    private Context context;
 
     @Inject
-    public NavigationManger() {
+    public NavigationManger(Context context) {
         // All the dependencies being injected using dagger
+        this.context = context;
         DaggerNavigationManagerComponent.builder().build().inject(this);
     }
 
+    /**
+     * Runs all the services in the right sequence to send the navigation data to the UI
+     * includes making request to the server, Gps connection
+     */
     public void run() {
         this.googleDirectionApiService.setOnProcessFinish(new IAsyncTaskListenerOnFinish() {
             @Override
@@ -42,6 +51,14 @@ public class NavigationManger  implements INavigationManager {
             }
         });
         Map<String, String> queries = new HashMap<>();
-        this.googleDirectionApiService.getDirections(APIConstants.MODE_WALKING, "Spannskamp 26","barmbek", APIConstants.GOOGLE_DIRECTIONS_API_KEY, queries);
+        boolean isNetworkConnected = networkCheckUtil.isConnectingToInternet(context);
+
+        if(isNetworkConnected) {
+            //TODO: Change the Origin and destination with proper inputs
+            this.googleDirectionApiService.getDirections(APIConstants.MODE_WALKING, "Spannskamp 26","barmbek", APIConstants.GOOGLE_DIRECTIONS_API_KEY, queries);
+        } else {
+            //TODO: Send A feedback to the UI that no internet Connection
+        }
+
     }
 }

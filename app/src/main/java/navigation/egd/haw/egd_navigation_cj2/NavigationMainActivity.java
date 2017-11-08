@@ -1,5 +1,6 @@
 package navigation.egd.haw.egd_navigation_cj2;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ import javax.inject.Inject;
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationManager;
 import navigation.egd.haw.egd_navigation_cj2.controllers.GpioPortsConfigs;
 import navigation.egd.haw.egd_navigation_cj2.dagger.NavigationMainActivity.DaggerNavigationMainActivityComponent;
+import navigation.egd.haw.egd_navigation_cj2.dagger.NavigationMainActivity.NavigationMainActivityModule;
 
 
 public class NavigationMainActivity extends AppCompatActivity {
@@ -24,7 +26,12 @@ public class NavigationMainActivity extends AppCompatActivity {
         //This is just a demo for using the GPIO ports
         //this.demo = new GpioPortsConfigs();
         //this.demo.confiugureGpioPorts();
-        DaggerNavigationMainActivityComponent.builder().build().inject(this);
+
+        Context context = this;
+        DaggerNavigationMainActivityComponent.builder()
+                .navigationMainActivityModule(new NavigationMainActivityModule(context))
+                .build()
+                .inject(this);
         this.manager.run();
     }
 
