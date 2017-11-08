@@ -7,17 +7,17 @@
     2) Fragility. If we change one part of program the other parts will have got uncontrolled errors.
     3) Immobility. The single module can be hardly separated from the rest part of the application to be used again.
 
- #Dependency Injection 
+ # Dependency Injection 
     In software engineering, dependency injection is a technique whereby one object supplies the dependencies of another object. A dependency is an object that 
     can be used (a service). An injection is the passing of a dependency to a dependent object (a client) that would use it. The service is made part of the client's state.[4]
     
-    #Advantages
+    # Advantages
        1 Dependency injection allows a client to remove all knowledge of a concrete implementation that it needs to use. This helps isolate the client from 
          the impact of design changes and defects. It promotes reusability, testability and maintainability[5]
        2 Reduction of boilerplate code in the application objects, since all work to initialize or set up dependencies is handled by a provider component.[5]
        3 Dependency Injection decreases coupling between a class and its dependency.[6] 
        
-    #Disadvantaages
+    # Disadvantaages
        1 Dependency injection creates clients that demand configuration details be supplied by construction code.
        2 Dependency injection can make code difficult to trace (read) because it separates behavior from construction. 
          This means developers must refer to more files to follow how a system performs.
