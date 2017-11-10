@@ -32,6 +32,8 @@ public class NavigationMainActivity extends AppCompatActivity {
                 .navigationMainActivityModule(new NavigationMainActivityModule(context))
                 .build()
                 .inject(this);
+
+        //TODO: This should be later on triggered on an interrupt or something
         this.manager.run();
     }
 
