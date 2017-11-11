@@ -39,4 +39,12 @@ dependencies {
     compile "com.google.dagger:dagger:2.6"
     provided 'javax.annotation:jsr250-api:1.0'
     apt "com.google.dagger:dagger-compiler:2.6"
+
+    //Xml Reader
+    //https://stackoverflow.com/questions/18084285/using-simplexml-with-android-and-gradle
+    compile('org.simpleframework:simple-xml:2.7.+'){
+        exclude module: 'stax'
+        exclude module: 'stax-api'
+        exclude module: 'xpp3'
+    }
 }
