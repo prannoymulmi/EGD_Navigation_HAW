@@ -13,6 +13,7 @@ import navigation.egd.haw.egd_navigation_cj2.Interfaces.INetworkCheckUtil;
  * This class checks if the Network is connected to the internet or not
  */
 
+//TODO: Remove it with a more generic class
 public class NetworkCheckUtil implements INetworkCheckUtil{
     @Override
     public boolean isConnectingToInternet(Object object) {

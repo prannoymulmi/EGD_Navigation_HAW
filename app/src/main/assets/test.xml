@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modules>
+    <moduleList>
+
+        <module name="test">
+            <methodList>
+                <methodProvider packageName="name1" className="className1"/>
+                <methodProvider packageName="name1.1" className="className1.1"/>
+            </methodList>
+        </module>
+
+        <module name="test2">
+                <methodList>
+                    <methodProvider packageName="name2" className="className2"/>
+                </methodList>
+        </module>
+
+    </moduleList>
+</modules>
+
+
+
