@@ -33,10 +33,16 @@ public class NavigationMainActivityModule {
         context = startup.getContext();
     }
 
+    /**
+     * This is an example where the config file which was read and the class is being instatinated dynamically
+     * @return
+     */
     @Provides
     INavigationManager iNavigationManager() {
         ClassInstantiatorUtil<INavigationManager> test = new ClassInstantiatorUtil<>();
+        // gets the packgae name of the coresponding provider
         DaggerModuleProviders provider = configs.get("NavigationMainActivityModule").get("iNavigationManager");
+        // Instantiates the class with the package name
         INavigationManager nav = test.instantiateClass(provider.getPackageName());
         return nav;
     }
