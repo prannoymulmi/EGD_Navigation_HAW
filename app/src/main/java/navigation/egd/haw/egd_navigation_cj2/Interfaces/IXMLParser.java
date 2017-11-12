@@ -12,6 +12,5 @@ import navigation.egd.haw.egd_navigation_cj2.models.XML.DaggerModuleProviders;
  */
 
 public interface IXMLParser {
-
     public Map<String, Map<String, DaggerModuleProviders>> parseXml(Context context);
 }

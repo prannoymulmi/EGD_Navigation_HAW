@@ -16,6 +16,17 @@ public class DaggerModuleProviders {
     @Attribute
     private String packageName;
 
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
+
+    @Attribute
+    private String methodName;
+
     public String getClassName() {
         return className;
     }

@@ -42,7 +42,7 @@ public class NavigationManagerModule {
 
     @Provides
     INavigationIOProcessService navigationIOProcessService() {
-        ClassInstantiatorUtil<INavigationIOProcessService, Void> instantiator = new ClassInstantiatorUtil<>();
+        ClassInstantiatorUtil<INavigationIOProcessService> instantiator = new ClassInstantiatorUtil<>();
         return instantiator.instantiateClass("NavigationIOProcessService", "navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices");
     }
 }

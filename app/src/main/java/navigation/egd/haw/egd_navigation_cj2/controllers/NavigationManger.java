@@ -17,6 +17,7 @@ import navigation.egd.haw.egd_navigation_cj2.Interfaces.INetworkCheckUtil;
 import navigation.egd.haw.egd_navigation_cj2.constants.APIConstants;
 import navigation.egd.haw.egd_navigation_cj2.dagger.NavigationManager.DaggerNavigationManagerComponent;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IAsyncTaskListenerOnFinish;
+import navigation.egd.haw.egd_navigation_cj2.utils.Startup;
 
 /**
  * This class is responsible to communicate with all the services for the navigation
@@ -30,12 +31,11 @@ public class NavigationManger  implements INavigationManager {
     @Inject INavigationIOProcessService navigationIOProcessService;
     @Inject IDirectionApi googleDirectionApiService;
     @Inject INetworkCheckUtil networkCheckUtil;
-    private Context context;
 
-    @Inject
-    public NavigationManger(Context context) {
+
+
+    public NavigationManger() {
         // All the dependencies being injected using dagger
-        this.context = context;
         DaggerNavigationManagerComponent.builder().build().inject(this);
     }
 
@@ -51,6 +51,7 @@ public class NavigationManger  implements INavigationManager {
             }
         });
         Map<String, String> queries = new HashMap<>();
+        Context context = Startup.getInstance().getContext();
         boolean isNetworkConnected = networkCheckUtil.isConnectingToInternet(context);
 
         if(isNetworkConnected) {

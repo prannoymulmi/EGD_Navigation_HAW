@@ -63,7 +63,7 @@ public class XMLParserUtil implements IXMLParser{
            Map<String, DaggerModuleProviders> temp = new HashMap<>();
 
            for(DaggerModuleProviders provider: providers) {
-               String key = provider.getPackageName();
+               String key = provider.getMethodName();
                temp.put(key, provider);
            }
            newList.put(moduleName, temp);
