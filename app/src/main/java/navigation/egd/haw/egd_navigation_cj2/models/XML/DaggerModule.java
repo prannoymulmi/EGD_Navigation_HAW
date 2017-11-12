@@ -19,7 +19,12 @@ public class DaggerModule {
     @ElementList(type = DaggerModuleProviders.class)
     private List<DaggerModuleProviders> methodList;
 
-    public List<DaggerModuleProviders> getmethodList() {
+
+    public String getModuleName() {
+        return moduleName;
+    }
+
+    public List<DaggerModuleProviders> getMethodList() {
         return methodList;
     }
 
