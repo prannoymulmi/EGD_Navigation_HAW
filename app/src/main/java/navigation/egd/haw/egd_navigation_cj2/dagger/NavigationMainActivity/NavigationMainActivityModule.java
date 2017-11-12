@@ -37,7 +37,7 @@ public class NavigationMainActivityModule {
     INavigationManager iNavigationManager() {
         ClassInstantiatorUtil<INavigationManager> test = new ClassInstantiatorUtil<>();
         DaggerModuleProviders provider = configs.get("NavigationMainActivityModule").get("iNavigationManager");
-        INavigationManager nav = test.instantiateClass(provider.getClassName(), provider.getPackageName());
+        INavigationManager nav = test.instantiateClass(provider.getPackageName());
         return nav;
     }
 

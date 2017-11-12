@@ -11,9 +11,6 @@ import org.simpleframework.xml.Root;
  @Root(name="methodProvider")
 public class DaggerModuleProviders {
     @Attribute
-    private String className;
-
-    @Attribute
     private String packageName;
 
     public String getMethodName() {
@@ -27,16 +24,8 @@ public class DaggerModuleProviders {
     @Attribute
     private String methodName;
 
-    public String getClassName() {
-        return className;
-    }
-
     public String getPackageName() {
         return packageName;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
     }
 
     public void setPackageName(String packageName) {

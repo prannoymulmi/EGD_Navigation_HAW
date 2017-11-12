@@ -19,11 +19,9 @@ public class ClassInstantiatorUtil<T> {
     }
 
 
-    public T instantiateClass(String className, String packageName) {
-        //Concatinating the pacakge name and class Name so that Java relfection can find the Class
-        String source = packageName.concat(".").concat(className);
+    public T instantiateClass(String packageName) {
         try {
-            return (T)Class.forName(source).newInstance();
+            return (T)Class.forName(packageName).newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

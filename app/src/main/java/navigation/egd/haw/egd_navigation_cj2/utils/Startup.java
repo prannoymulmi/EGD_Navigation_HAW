@@ -3,9 +3,6 @@ package navigation.egd.haw.egd_navigation_cj2.utils;
 import android.content.Context;
 
 import java.util.Map;
-
-import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationIOProcessService;
-import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationManager;
 import navigation.egd.haw.egd_navigation_cj2.models.XML.DaggerModuleProviders;
 
 /**
