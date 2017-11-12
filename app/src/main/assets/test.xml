@@ -2,16 +2,16 @@
 <modules>
     <moduleList>
 
-        <module name="test">
+        <module name="NavigationMainActivityModule">
             <methodList>
-                <methodProvider packageName="name1" className="className1"/>
-                <methodProvider packageName="name1.1" className="className1.1"/>
+                <methodProvider packageName="navigation.egd.haw.egd_navigation_cj2.controllers" className="NavigationManger" methodName="iNavigationManager"/>
+                <methodProvider packageName="name1.1" className="className1.1" methodName="dd"/>
             </methodList>
         </module>
 
         <module name="test2">
                 <methodList>
-                    <methodProvider packageName="name2" className="className2"/>
+                    <methodProvider packageName="name2" className="className2" methodName="LOLO"/>
                 </methodList>
         </module>
 

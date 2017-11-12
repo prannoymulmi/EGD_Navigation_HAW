@@ -2,13 +2,17 @@ package navigation.egd.haw.egd_navigation_cj2.dagger.NavigationMainActivity;
 
 import android.content.Context;
 
-import javax.inject.Singleton;
+import java.util.Map;
+
+
 
 import dagger.Module;
 import dagger.Provides;
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationManager;
 import navigation.egd.haw.egd_navigation_cj2.controllers.GpioPortsConfigs;
-import navigation.egd.haw.egd_navigation_cj2.controllers.NavigationManger;
+import navigation.egd.haw.egd_navigation_cj2.models.XML.DaggerModuleProviders;
+import navigation.egd.haw.egd_navigation_cj2.utils.ClassInstantiatorUtil;
+import navigation.egd.haw.egd_navigation_cj2.utils.Startup;
 
 /**
  * @author Prannoy
@@ -20,15 +24,21 @@ import navigation.egd.haw.egd_navigation_cj2.controllers.NavigationManger;
 
 @Module
 public class NavigationMainActivityModule {
-
     private final Context context;
-    public NavigationMainActivityModule(Context context) {
-       this.context = context;
+    private final Startup startup;
+    private final Map<String, Map<String, DaggerModuleProviders>> configs;
+    public NavigationMainActivityModule() {
+        startup = Startup.getInstance();
+        configs = startup.getConfigs();
+        context = startup.getContext();
     }
 
     @Provides
     INavigationManager iNavigationManager() {
-        return new NavigationManger(context);
+        ClassInstantiatorUtil<INavigationManager> test = new ClassInstantiatorUtil<>();
+        DaggerModuleProviders provider = configs.get("NavigationMainActivityModule").get("iNavigationManager");
+        INavigationManager nav = test.instantiateClass(provider.getClassName(), provider.getPackageName());
+        return nav;
     }
 
     @Provides

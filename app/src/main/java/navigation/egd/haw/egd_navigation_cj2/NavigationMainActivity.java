@@ -9,8 +9,7 @@ import javax.inject.Inject;
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationManager;
 import navigation.egd.haw.egd_navigation_cj2.controllers.GpioPortsConfigs;
 import navigation.egd.haw.egd_navigation_cj2.dagger.NavigationMainActivity.DaggerNavigationMainActivityComponent;
-import navigation.egd.haw.egd_navigation_cj2.dagger.NavigationMainActivity.NavigationMainActivityModule;
-import navigation.egd.haw.egd_navigation_cj2.utils.XMLParserUtil;
+import navigation.egd.haw.egd_navigation_cj2.utils.Startup;
 
 
 public class NavigationMainActivity extends AppCompatActivity {
@@ -29,15 +28,10 @@ public class NavigationMainActivity extends AppCompatActivity {
         //this.demo.confiugureGpioPorts();
 
         Context context = this;
+        Startup startup = Startup.getInstance();
+        startup.init(context);
 
-        //Only for test purposes Here
-        XMLParserUtil parser = new XMLParserUtil();
-        parser.parseXml(context);
-
-        DaggerNavigationMainActivityComponent.builder()
-                .navigationMainActivityModule(new NavigationMainActivityModule(context))
-                .build()
-                .inject(this);
+        DaggerNavigationMainActivityComponent.builder().build().inject(this);
 
         //TODO: This should be later on triggered on an interrupt or something
         this.manager.run();

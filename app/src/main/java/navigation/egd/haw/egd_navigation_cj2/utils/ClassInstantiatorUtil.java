@@ -13,14 +13,11 @@ package navigation.egd.haw.egd_navigation_cj2.utils;
  * A generic Class is created (ClassInstantiatorUtil<T>) so that a type check can be done before returning the instatiated class
  * @param <T>
  */
-public class ClassInstantiatorUtil<T, returnT> {
+public class ClassInstantiatorUtil<T> {
     public ClassInstantiatorUtil() {
 
     }
 
-    public ClassInstantiatorUtil(returnT type){
-
-    }
 
     public T instantiateClass(String className, String packageName) {
         //Concatinating the pacakge name and class Name so that Java relfection can find the Class
