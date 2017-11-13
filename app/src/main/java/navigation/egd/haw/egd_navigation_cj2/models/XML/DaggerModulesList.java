@@ -6,8 +6,11 @@ import org.simpleframework.xml.Root;
 import java.util.List;
 
 /**
+ * @author prannoy
+ * This is a model for the config xml file which can be used to instantiate the classes for the DI with dagger framework.
  *
- * Created by prann on 11/11/2017.
+ * The Xml is parsed with nested lists(SimpleXML). Example Below:
+ * http://simple.sourceforge.net/download/stream/doc/tutorial/tutorial.php#list
  */
 
 @Root
