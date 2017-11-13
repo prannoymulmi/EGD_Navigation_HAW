@@ -12,7 +12,7 @@ import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationManager;
 import navigation.egd.haw.egd_navigation_cj2.controllers.GpioPortsConfigs;
 import navigation.egd.haw.egd_navigation_cj2.models.XML.DaggerModuleProviders;
 import navigation.egd.haw.egd_navigation_cj2.utils.ClassInstantiatorUtil;
-import navigation.egd.haw.egd_navigation_cj2.utils.Startup;
+import navigation.egd.haw.egd_navigation_cj2.utils.StartupUtil;
 
 /**
  * @author Prannoy
@@ -25,12 +25,12 @@ import navigation.egd.haw.egd_navigation_cj2.utils.Startup;
 @Module
 public class NavigationMainActivityModule {
     private final Context context;
-    private final Startup startup;
+    private final StartupUtil startupUtil;
     private final Map<String, Map<String, DaggerModuleProviders>> configs;
     public NavigationMainActivityModule() {
-        startup = Startup.getInstance();
-        configs = startup.getConfigs();
-        context = startup.getContext();
+        startupUtil = StartupUtil.getInstance();
+        configs = startupUtil.getConfigs();
+        context = startupUtil.getContext();
     }
 
     /**

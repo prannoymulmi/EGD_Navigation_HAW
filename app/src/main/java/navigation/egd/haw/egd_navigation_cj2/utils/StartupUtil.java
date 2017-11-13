@@ -17,8 +17,8 @@ import navigation.egd.haw.egd_navigation_cj2.models.XML.DaggerModuleProviders;
  * Created by prann on 11/12/2017.
  */
 
-public class Startup {
-    private static final Startup ourInstance = new Startup();
+public class StartupUtil {
+    private static final StartupUtil ourInstance = new StartupUtil();
     private Context context;
 
 
@@ -47,7 +47,7 @@ public class Startup {
 
     private Map<String, Map<String, DaggerModuleProviders>> configs;
 
-    public static Startup getOurInstance() {
+    public static StartupUtil getOurInstance() {
         return ourInstance;
     }
 
@@ -55,10 +55,10 @@ public class Startup {
         return configs;
     }
 
-    public static Startup getInstance() {
+    public static StartupUtil getInstance() {
         return ourInstance;
     }
 
-    private Startup() {
+    private StartupUtil() {
     }
 }
