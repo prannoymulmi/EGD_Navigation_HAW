@@ -17,7 +17,7 @@ import navigation.egd.haw.egd_navigation_cj2.Interfaces.INetworkCheckUtil;
 import navigation.egd.haw.egd_navigation_cj2.constants.APIConstants;
 import navigation.egd.haw.egd_navigation_cj2.dagger.NavigationManager.DaggerNavigationManagerComponent;
 import navigation.egd.haw.egd_navigation_cj2.listeners.IAsyncTaskListenerOnFinish;
-import navigation.egd.haw.egd_navigation_cj2.utils.Startup;
+import navigation.egd.haw.egd_navigation_cj2.utils.StartupUtil;
 
 /**
  * This class is responsible to communicate with all the services for the navigation
@@ -51,7 +51,7 @@ public class NavigationManger  implements INavigationManager {
             }
         });
         Map<String, String> queries = new HashMap<>();
-        Context context = Startup.getInstance().getContext();
+        Context context = StartupUtil.getInstance().getContext();
         boolean isNetworkConnected = networkCheckUtil.isConnectingToInternet(context);
 
         if(isNetworkConnected) {
