@@ -36,6 +36,8 @@ public class GoogleDirectionApiMiddleware {
          * also an interceptor is added so that the status codes can be read meaning when the server send a status code of for the request not being
          * successful it can be handled.
          */
+
+        //TODO: Override the timeout method
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(APIConstants.CONNECT_TIMEOUT_MILLI_SEC, TimeUnit.MILLISECONDS)
                 .readTimeout(APIConstants.READ_TIMEOUT_MILLI_SEC, TimeUnit.MILLISECONDS)
@@ -47,14 +49,12 @@ public class GoogleDirectionApiMiddleware {
 
                         // TODO: Put related status code that is needed to be handled
 
-                        //This code is whe the Input or output is wrong
+                        //This code is a sucess
                         if (response.code() == 200) {
 
+
                             //TODO: This must be discussed what is to be done when an error occurs
-                            /**
-                             * A Suggestion for error handling is get the query parameters from the response and the give it back to the UI so that they can check it
-                             * Must be discussed
-                             */
+
                             return response;
                         }
 
@@ -74,6 +74,15 @@ public class GoogleDirectionApiMiddleware {
     @Nullable
     public DirectionAPI getWalkingDirections(String mode, String origin, String destination, String key, Map<String,String> queries) throws IOException {
         Response<DirectionAPI> response = mDirectionApi.getWalkingDirections(mode, origin, destination, key, queries).execute();
+
+        /**
+         * ERROR handling being done when the status of the body is not OK
+         * A Suggestion for error handling is get the query parameters from the response and the give it back to the UI so that they can check it
+         * Must be discussed
+         */
+        if(!response.body().getStatus().equals("OK")) {
+            return response.body();
+        }
         return response.body();
     }
 }
