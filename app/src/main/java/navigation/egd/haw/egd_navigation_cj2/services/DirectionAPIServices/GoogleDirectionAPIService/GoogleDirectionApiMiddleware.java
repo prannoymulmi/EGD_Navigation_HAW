@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 
 import navigation.egd.haw.egd_navigation_cj2.constants.APIConstants;
 import navigation.egd.haw.egd_navigation_cj2.models.DirectionAPI.DirectionAPI;
-import navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.GoogleDirectionAPIService.IGoogleDirectionApiService;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -21,17 +20,47 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @author prannoy
  * Created by prann on 10/25/2017.
  * <a href=https://github.com/square/okhttp/wiki/Recipes#timeouts/> example for Retrofit timeout
+ * <a href=https://futurestud.io/tutorials/retrofit-2-catch-server-errors-globally-with-response-interceptor/> example for error handling
  */
 
 public class GoogleDirectionApiMiddleware {
     private IGoogleDirectionApiService mDirectionApi;
 
 
+    /**
+     * Here the retrofit client is being instantiated which is responsible for carrying out all the requests.
+     */
     public GoogleDirectionApiMiddleware() {
-        //Adding a timeout so that if there are some issues connecting to the server it times out
+        /**
+         *An OkHttpclient adds a timeout so that if there are some issues connecting to the server it times out and
+         * also an interceptor is added so that the status codes can be read meaning when the server send a status code of for the request not being
+         * successful it can be handled.
+         */
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(APIConstants.CONNECT_TIMEOUT_MILLI_SEC, TimeUnit.MILLISECONDS)
                 .readTimeout(APIConstants.READ_TIMEOUT_MILLI_SEC, TimeUnit.MILLISECONDS)
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public okhttp3.Response intercept(Chain chain) throws IOException {
+                        Request request = chain.request();
+                        okhttp3.Response response = chain.proceed(request);
+
+                        // TODO: Put related status code that is needed to be handled
+
+                        //This code is whe the Input or output is wrong
+                        if (response.code() == 200) {
+
+                            //TODO: This must be discussed what is to be done when an error occurs
+                            /**
+                             * A Suggestion for error handling is get the query parameters from the response and the give it back to the UI so that they can check it
+                             * Must be discussed
+                             */
+                            return response;
+                        }
+
+                        return response;
+                    }
+                })
                 .build();
 
         mDirectionApi = new Retrofit.Builder()

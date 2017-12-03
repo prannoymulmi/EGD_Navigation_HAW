@@ -56,7 +56,7 @@ public class NavigationManger  implements INavigationManager {
 
         if(isNetworkConnected) {
             //TODO: Change the Origin and destination with proper inputs
-            this.googleDirectionApiService.getDirections(APIConstants.MODE_WALKING, "Spannskamp 26","barmbek", APIConstants.GOOGLE_DIRECTIONS_API_KEY, queries);
+            this.googleDirectionApiService.getDirections(APIConstants.MODE_WALKING, "Spannskamp 26", "barmbek", APIConstants.GOOGLE_DIRECTIONS_API_KEY, queries);
         } else {
             //TODO: Send A feedback to the UI that no internet Connection
         }
