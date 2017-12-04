@@ -1,9 +1,10 @@
 package navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices;
+import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationIOProcessService;
 
 //Nicola Giaconi
 //4-12-17
 
-public class NavigationIOProcessService {
+public class NavigationIOProcessService implements INavigationIOProcessService {
 
     private boolean isFlowActive = false;
     private boolean userReplied = false;
