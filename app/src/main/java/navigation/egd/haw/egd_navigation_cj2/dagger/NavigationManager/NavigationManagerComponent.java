@@ -3,7 +3,7 @@ package navigation.egd.haw.egd_navigation_cj2.dagger.NavigationManager;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import navigation.egd.haw.egd_navigation_cj2.controllers.NavigationManger;
+import navigation.egd.haw.egd_navigation_cj2.presenters.NavigationManger;
 import navigation.egd.haw.egd_navigation_cj2.dagger.NetworkCheckUtil.NetworkCheckUtilModule;
 
 /**

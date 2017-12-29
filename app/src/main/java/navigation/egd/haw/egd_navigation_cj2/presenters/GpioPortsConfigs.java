@@ -1,4 +1,4 @@
-package navigation.egd.haw.egd_navigation_cj2.controllers;
+package navigation.egd.haw.egd_navigation_cj2.presenters;
 
 import android.util.Log;
 import com.google.android.things.pio.Gpio;

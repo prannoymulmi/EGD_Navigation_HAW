@@ -9,7 +9,7 @@ import java.util.Map;
 import dagger.Module;
 import dagger.Provides;
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationManager;
-import navigation.egd.haw.egd_navigation_cj2.controllers.GpioPortsConfigs;
+import navigation.egd.haw.egd_navigation_cj2.presenters.GpioPortsConfigs;
 import navigation.egd.haw.egd_navigation_cj2.models.XML.DaggerModuleProviders;
 import navigation.egd.haw.egd_navigation_cj2.utils.ClassInstantiatorUtil;
 import navigation.egd.haw.egd_navigation_cj2.utils.StartupUtil;

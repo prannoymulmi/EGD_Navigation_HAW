@@ -7,7 +7,7 @@ import android.os.Bundle;
 import javax.inject.Inject;
 
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationManager;
-import navigation.egd.haw.egd_navigation_cj2.controllers.GpioPortsConfigs;
+import navigation.egd.haw.egd_navigation_cj2.presenters.GpioPortsConfigs;
 import navigation.egd.haw.egd_navigation_cj2.dagger.NavigationMainActivity.DaggerNavigationMainActivityComponent;
 import navigation.egd.haw.egd_navigation_cj2.utils.StartupUtil;
 
