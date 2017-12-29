@@ -25,7 +25,8 @@ import navigation.egd.haw.egd_navigation_cj2.utils.AsyncTaskUtil;
  */
 
 public class GoogleDirectionApiService implements IDirectionApi{
-    //Injection the dependencies using the @Inject annotations this is managed by the dagger framework checks in the component which modules are to be included
+    //Injection the dependencies using the @Inject annotations
+    // this is managed by the dagger framework checks in the component which modules are to be included
     @Inject AsyncTaskUtil asyncTaskUtil;
     @Inject GoogleDirectionApiMiddleware googleDirectionApiMiddleware;
     @Inject DirectionAPI results;
@@ -43,6 +44,8 @@ public class GoogleDirectionApiService implements IDirectionApi{
                 .build()
                 .inject(this);
 
+        //setting up listener which notifies when a response is recieved from the
+        //google API
         asyncTaskUtil.setAsyncTaskListenerOnFinish(new IAsyncTaskListenerOnFinish() {
             @Override
             public void onProcessFinish(Object result) {
@@ -57,6 +60,8 @@ public class GoogleDirectionApiService implements IDirectionApi{
     }
 
     public void getDirections(final String mode, final String origin, final String destination, final String key, final Map<String,String> queries) {
+        //setting up a ascyn task to run as a thread when the http request is made
+        //This ensures that the request that are being made is not blocking the code
         asyncTaskUtil.setAsyncTaskListener(new IAsyncTaskListener() {
             @Override
             public Object asyncTaskCallback(Object... objects)  {

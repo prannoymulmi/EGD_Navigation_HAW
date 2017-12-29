@@ -4,7 +4,7 @@
 
         <module name="NavigationMainActivityModule">
             <methodList>
-                <methodProvider packageName="navigation.egd.haw.egd_navigation_cj2.controllers.NavigationManger" methodName="iNavigationManager"/>
+                <methodProvider packageName="navigation.egd.haw.egd_navigation_cj2.presenters.NavigationManger" methodName="iNavigationManager"/>
                 <methodProvider packageName="name1.1"  methodName="dd"/>
             </methodList>
         </module>

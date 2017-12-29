@@ -1,4 +1,4 @@
-package navigation.egd.haw.egd_navigation_cj2.controllers;
+package navigation.egd.haw.egd_navigation_cj2.presenters;
 
 import android.content.Context;
 import android.util.Log;
