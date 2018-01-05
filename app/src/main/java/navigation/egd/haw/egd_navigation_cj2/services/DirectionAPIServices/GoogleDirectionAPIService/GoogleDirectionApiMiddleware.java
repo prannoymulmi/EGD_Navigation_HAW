@@ -58,6 +58,15 @@ public class GoogleDirectionApiMiddleware {
                             return response;
                         }
 
+                        //Catch all errors here
+                        if (response.code() >= 400) {
+
+
+                            //TODO: This must be discussed what is to be done when an error occurs
+
+                            return null;
+                        }
+
                         return response;
                     }
                 })
@@ -82,7 +91,8 @@ public class GoogleDirectionApiMiddleware {
          */
         if(!response.body().getStatus().equals("OK")) {
             return response.body();
+        } else {
+            return null;
         }
-        return response.body();
     }
 }
