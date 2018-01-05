@@ -3,6 +3,7 @@ package navigation.egd.haw.egd_navigation_cj2.services.DirectionAPIServices.Goog
 import android.support.annotation.Nullable;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -21,6 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by prann on 10/25/2017.
  * <a href=https://github.com/square/okhttp/wiki/Recipes#timeouts/> example for Retrofit timeout
  * <a href=https://futurestud.io/tutorials/retrofit-2-catch-server-errors-globally-with-response-interceptor/> example for error handling
+ * <a href=https://stackoverflow.com/questions/29921667/retrofit-and-okhttpclient-catch-connection-timeout-in-failure-method catch timeout
  */
 
 public class GoogleDirectionApiMiddleware {
@@ -44,30 +46,37 @@ public class GoogleDirectionApiMiddleware {
                 .addInterceptor(new Interceptor() {
                     @Override
                     public okhttp3.Response intercept(Chain chain) throws IOException {
-                        Request request = chain.request();
-                        okhttp3.Response response = chain.proceed(request);
+                        try {
+                            Request request = chain.request();
+                            okhttp3.Response response = chain.proceed(request);
 
-                        // TODO: Put related status code that is needed to be handled
+                            // TODO: Put related status code that is needed to be handled
 
-                        //This code is a sucess
-                        if (response.code() == 200) {
+                            //This code is a sucess
+                            if (response.code() == 200) {
 
 
-                            //TODO: This must be discussed what is to be done when an error occurs
+                                //TODO: This must be discussed what is to be done when an error occurs
+
+                                return response;
+                            }
+
+                            //Catch all errors here
+                            if (response.code() >= 400) {
+
+
+                                //TODO: This must be discussed what is to be done when an error occurs
+
+                                return null;
+                            }
 
                             return response;
-                        }
 
-                        //Catch all errors here
-                        if (response.code() >= 400) {
-
-
-                            //TODO: This must be discussed what is to be done when an error occurs
-
+                        } catch(SocketTimeoutException exception){
+                            //TODO: Decide what to do when a timeout occurs
                             return null;
                         }
 
-                        return response;
                     }
                 })
                 .build();
