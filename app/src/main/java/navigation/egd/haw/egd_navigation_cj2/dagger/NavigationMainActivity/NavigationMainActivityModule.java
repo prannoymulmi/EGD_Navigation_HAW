@@ -39,11 +39,11 @@ public class NavigationMainActivityModule {
      */
     @Provides
     INavigationManager iNavigationManager() {
-        ClassInstantiatorUtil<INavigationManager> test = new ClassInstantiatorUtil<>();
+        ClassInstantiatorUtil<INavigationManager> dynamicObjectInstantiator = new ClassInstantiatorUtil<>();
         // gets the packgae name of the coresponding provider
         DaggerModuleProviders provider = configs.get("NavigationMainActivityModule").get("iNavigationManager");
         // Instantiates the class with the package name
-        INavigationManager nav = test.instantiateClass(provider.getPackageName());
+        INavigationManager nav = dynamicObjectInstantiator.instantiateClass(provider.getPackageName());
         return nav;
     }
 
