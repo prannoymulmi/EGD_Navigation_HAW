@@ -10,7 +10,7 @@ public class APIConstants {
     public APIConstants(){}
 
     //TODO: replace with Real API KEYS
-    public static String GOOGLE_DIRECTIONS_API_KEY = "AIzaSyBPVLp0tiS_bvL3OCRS1Mnwq_WiLW5myhE";
+    public static String GOOGLE_DIRECTIONS_API_KEY = "";
     public static String GOOGLE_DIRECTIONS_API_BASE_URL = "https://maps.googleapis.com/";
     public static String MODE_WALKING= "walking";
     public static int READ_TIMEOUT_MILLI_SEC = 10000;

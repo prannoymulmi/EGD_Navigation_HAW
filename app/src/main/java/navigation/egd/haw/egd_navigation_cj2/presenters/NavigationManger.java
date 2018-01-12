@@ -62,7 +62,7 @@ public class NavigationManger  implements INavigationManager {
              * A Suggestion to solve this issue, Since the use case is only for walking  it is assumed that the user will not be using the navigation for going long distance travel so the
              * City name and Country of his current position will be added to the destination or latitiute or long will be specified
              */
-            this.googleDirectionApiService.getDirections(APIConstants.MODE_WALKING, "Spannskamp 26", "rathausstraße, Hamburg", APIConstants.GOOGLE_DIRECTIONS_API_KEY, queries);
+            this.googleDirectionApiService.getDirections(APIConstants.MODE_WALKING, "Spannskamp 26", "Barmbek, Hamburg", APIConstants.GOOGLE_DIRECTIONS_API_KEY, queries);
         } else {
             //TODO: Send A feedback to the UI that no internet Connection
         }

@@ -98,7 +98,7 @@ public class GoogleDirectionApiMiddleware {
          * A Suggestion for error handling is get the query parameters from the response and the give it back to the UI so that they can check it
          * Must be discussed
          */
-        if(!response.body().getStatus().equals("OK")) {
+        if(response.body().getStatus().equals("OK")) {
             return response.body();
         } else {
             return null;
