@@ -2,9 +2,9 @@ package navigation.egd.haw.egd_navigation_cj2.services.NavigationIOServices;
 import navigation.egd.haw.egd_navigation_cj2.Interfaces.INavigationIOProcessService;
 
 //Nicola Giaconi
-//4-12-17
+//15-01-18
 
-public class NavigationIOProcessService implements INavigationIOProcessService {
+public class NavigationIOProcessService<T> implements INavigationIOProcessService {
 
     private boolean isFlowActive = false;
     private boolean userReplied = false;
@@ -17,12 +17,12 @@ public class NavigationIOProcessService implements INavigationIOProcessService {
 
 
     //constructor
-	public NavigationIOProcessService(String myJSON){
+	public NavigationIOProcessService(T myJSON){
         myInf = new Information(myJSON);
         myInf.prepare();
     }
 
-    void run(){
+    public void run(){
         /*
         This function handles the flow of information.
         */
@@ -30,7 +30,6 @@ public class NavigationIOProcessService implements INavigationIOProcessService {
         if ( isRouteConfirmed ){
             isFlowActive = true;
         }
-
         while ( isFlowActive ){
             if( !isUserLost && !isUserArrived ){
                 if( !isUserUpdated ){
@@ -60,7 +59,7 @@ public class NavigationIOProcessService implements INavigationIOProcessService {
         }
     }
 
-    void confirmRoute(){
+    public void confirmRoute(){
         /*
         This function asks the user to confirm the route.
         The variables userReplied and isRouteConfirmed are changed through setters by Interface.
@@ -75,17 +74,27 @@ public class NavigationIOProcessService implements INavigationIOProcessService {
         }
     }
 
-    void checkUserPosition(){
+    public void checkUserPosition(){
         /*
-        This function checks if the user is lost and if the step was completed.
+        This function checks if the user is lost / if the step was completed.
         */
-        //Asks for position to location services submodule.
-        //Compares position and decides if step is complete or not, and if user is lost or not.
-        isUserLost = false;
-        isStepComplete = true;
+        double stepLat, stepLong, myLat, myLong, tol, lostTol;
+        myLat = 1;         //myLat=locationServices.position.lat;
+        myLong = 1;        //myLong=locationServices.position.long;
+        tol = 0.0001;      //tolerance for step complete
+        lostTol = 0.005;   //tolerance until user is considered lost
+        stepLat = myInf.geoCoordinates[myInf.currentStep][0];
+        stepLong = myInf.geoCoordinates[myInf.currentStep][1];
+        if ( myLat+tol > stepLat && myLat-tol < stepLat)
+            if ( myLong+tol > stepLong && myLong-tol < stepLong)
+                isStepComplete = true;
+        else if ( myLat-lostTol > stepLat || myLat+lostTol < stepLat)
+                isUserLost = true;
+        else if ( myLong-lostTol > stepLong || myLong+lostTol < stepLong)
+                isUserLost = true;
     }
 
-    void terminateFlow(){
+    public void terminateFlow(){
         /*
         This function terminates the flow of information. Called by Interface Module.
         */
@@ -93,7 +102,7 @@ public class NavigationIOProcessService implements INavigationIOProcessService {
     }
 
 
-    void replayInfo(){
+    public void replayInfo(){
         /*
         This function resets the flag indicating that the user has already heard the Info.
         Called by Interface Module.
@@ -101,56 +110,56 @@ public class NavigationIOProcessService implements INavigationIOProcessService {
         isUserUpdated = false;
     }
 
-    void sendInitialInfo(){
+    public void sendInitialInfo(){
         /*
         This function sends the initial information to Interface module.
         */
         sendToInterface(myInf.initialInfo);
     }
 
-    void sendStepInfo(){
+    public void sendStepInfo(){
         /*
         This function sends the step information to Interface module.
         */
         sendToInterface(myInf.stepsList[myInf.currentStep]);
     }
 
-    void sendStepCompletedMessage(){
+    public void sendStepCompletedMessage(){
         /*
         This function sends the step completed message to Interface module.
         */
         sendToInterface(myInf.stepCompletedMessage);
     }
 
-    void updateInformation(){
+    public void updateInformation(){
         /*
         This function updates the current step value.
         */
         myInf.updateStepIndex();
     }
 
-    void sendLostMessage(){
+    public void sendLostMessage(){
         /*
         This function sends the lost message to Interface module.
         */
         sendToInterface(myInf.lostMessage);
     }
 
-    void sendArrivedMessage(){
+    public void sendArrivedMessage(){
         /*
         This function sends the arrived message to Interface module.
         */
         sendToInterface(myInf.arrivedMessage);
     }
 
-    void sendErrorMessage(){
+    public void sendErrorMessage(){
         /*
         This function sends the error message to Interface module.
         */
         sendToInterface(myInf.errorMessage);
     }
 
-    void sendToInterface(String toSend){
+    public void sendToInterface(String toSend){
         /*
         This function sends the input string to the Interface module.
         */
@@ -162,7 +171,7 @@ public class NavigationIOProcessService implements INavigationIOProcessService {
         This class stores the JSON-file information and makes it available to the outer class.
         */
 
-        private String myJSON;
+        private T myJSON;
         private String initialInfo;
         private String arrivedMessage = "You have reached your final destination.";
         private String lostMessage = "You are not anymore on course. Please perform a new query.";
@@ -174,20 +183,21 @@ public class NavigationIOProcessService implements INavigationIOProcessService {
         private String[] stepsDuration;
         private double[][] geoCoordinates;
 
-        public Information(String myJSON){
+        public Information(T myJSON){
             /*
             Class constructor
              */
             this.myJSON = myJSON;
         }
 
-        void prepare(){
+        public void prepare(){
             /*
 			This function fills in the all the variables with values from JSON-file.
 			*/
+
         }
 
-        void updateStepIndex(){
+        public void updateStepIndex(){
 		    /*
             This function updates the index of the current step.
             */
@@ -199,6 +209,5 @@ public class NavigationIOProcessService implements INavigationIOProcessService {
                 ++currentStep;
             }
         }
-
     }
 }
